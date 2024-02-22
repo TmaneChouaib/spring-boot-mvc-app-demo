@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
 @Entity
 @AllArgsConstructor
@@ -24,7 +26,7 @@ public class Company {
     private String CEO;
     private String phoneNumber;
     private String email;
-    private String foundationDate;
+    private LocalDate foundationDate;
     private Double revenue;
     private Integer numberOfEmployees;
     private String fiscalCode;
