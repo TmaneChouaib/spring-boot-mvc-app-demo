@@ -15,7 +15,7 @@ public interface CompanyRepository extends JpaRepository<Company, Long> {
 
     public List<Company> findByCity(String city);
 
-    public List<Company> findByRevenueBetween(Double x, Double y);
+    public List<Company> findByRevenueBetween(Double minRevenu, Double maxRevenu);
 
     public List<Company> findByNumberOfEmployeesBetween(Integer minEmployees, Integer maxEmployees);
 
