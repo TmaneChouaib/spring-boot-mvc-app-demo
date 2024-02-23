@@ -1,13 +1,15 @@
 package com.tmane.springbootmvcdemo.service;
 
 import com.tmane.springbootmvcdemo.entity.Company;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDate;
 import java.util.List;
 
 
 public interface CompanyService {
-    public List<Company> findCompaniesByCEO(String name);
+    public Page<Company> findCompaniesByCEO(String name, Pageable pageable);
 
     public List<Company> findCompaniesByCountry(String country);
 

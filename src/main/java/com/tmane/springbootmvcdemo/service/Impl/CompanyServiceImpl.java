@@ -4,6 +4,8 @@ import com.tmane.springbootmvcdemo.entity.Company;
 import com.tmane.springbootmvcdemo.repository.CompanyRepository;
 import com.tmane.springbootmvcdemo.service.CompanyService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -15,8 +17,8 @@ public class CompanyServiceImpl implements CompanyService {
     private CompanyRepository companyRepository;
 
     @Override
-    public List<Company> findCompaniesByCEO(String name) {
-        return companyRepository.findByCEO(name);
+    public Page<Company> findCompaniesByCEO(String name, Pageable pageable) {
+        return companyRepository.findByCEO(name, pageable);
     }
 
     @Override
