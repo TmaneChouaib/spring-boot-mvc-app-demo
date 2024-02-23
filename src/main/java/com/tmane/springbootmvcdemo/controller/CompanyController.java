@@ -46,5 +46,12 @@ public class CompanyController {
         return "redirect:/companies?page=" + page + "&keyword=" + keyWord;
     }
 
+    @GetMapping("/edit/{id}")
+    public String EditCompany(@PathVariable Long id, Model model) {
+        Company company = companyRepository.findById(id).orElseThrow(() -> new RuntimeException("Company not found with id:" + id));
+        model.addAttribute("company", company);
+        return "EditCompany";
+    }
+
 
 }
