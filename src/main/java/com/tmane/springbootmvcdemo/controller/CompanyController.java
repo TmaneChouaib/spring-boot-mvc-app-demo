@@ -37,7 +37,7 @@ public class CompanyController {
         return "AddCompany";
     }
 
-    @PutMapping
+    @PostMapping("/save")
     public String SaveCompany(@ModelAttribute("company") Company company,
                               @RequestParam(name = "page", defaultValue = "0") int page,
                               @RequestParam(name = "keyword", defaultValue = "") String keyWord) {
@@ -45,5 +45,6 @@ public class CompanyController {
         companyRepository.save(company);
         return "redirect:/companies?page=" + page + "&keyword=" + keyWord;
     }
+
 
 }
