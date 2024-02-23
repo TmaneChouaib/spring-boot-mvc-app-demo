@@ -5,6 +5,7 @@ import com.tmane.springbootmvcdemo.repository.CompanyRepository;
 import com.tmane.springbootmvcdemo.service.CompanyService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +18,29 @@ public class CompanyServiceImpl implements CompanyService {
     private CompanyRepository companyRepository;
 
     @Override
-    public Page<Company> findCompaniesByCEO(String name, Pageable pageable) {
-        return companyRepository.findByCEO(name, pageable);
+    public Company saveCompany(Company company) {
+        return companyRepository.save(company);
+    }
+
+    @Override
+    public void deleteCompanyById(Long id) {
+        companyRepository.deleteById(id);
+    }
+
+    @Override
+    public Company findCompanyById(Long id) {
+        return companyRepository.findById(id).get();
+    }
+
+    @Override
+    public Page<Company> getAllCompanies(int pageNum, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
+        return companyRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Company> findCompaniesByCEO(String query, Pageable pageable) {
+        return companyRepository.findByCEO(query, pageable);
     }
 
     @Override

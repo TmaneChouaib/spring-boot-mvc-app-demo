@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class CompanyController {
     private CompanyService companyService;
-    private final CompanyRepository companyRepository;
 
     @GetMapping
     public String getAllCompanies(Model model,
@@ -23,7 +22,7 @@ public class CompanyController {
                                   @RequestParam(name = "size", defaultValue = "5") int size,
                                   @RequestParam(name = "keyword", defaultValue = "") String keyword) {
 
-        Page<Company> companyPage = companyService.findCompaniesByCEO(keyword, PageRequest.of(page, size));
+        Page<Company> companyPage = companyService.getAllCompanies(page, size);
         model.addAttribute("Companies", companyPage.getContent());
         model.addAttribute("pages", new int[companyPage.getTotalPages()]);
         model.addAttribute("currentPage", page);
@@ -42,22 +41,22 @@ public class CompanyController {
                               @RequestParam(name = "page", defaultValue = "0") int page,
                               @RequestParam(name = "keyword", defaultValue = "") String keyword) {
 
-        companyRepository.save(company);
+        companyService.saveCompany(company);
         return "redirect:/companies?page=" + page + "&keyword=" + keyword;
     }
 
     @GetMapping("/edit/{id}")
     public String editCompanyForm(@PathVariable Long id, Model model) {
-        Company company = companyRepository.findById(id).orElseThrow(() -> new RuntimeException("Company not found with id:" + id));
+        Company company = companyService.findCompanyById(id);
         model.addAttribute("company", company);
         return "EditCompany";
     }
 
     @DeleteMapping("/delete/{id}")
     public String deleteCompanyById(@PathVariable Long id,
-                                @RequestParam(name = "page", defaultValue = "0") int page,
-                                @RequestParam(name = "keyword", defaultValue = "") String keyword) {
-        companyRepository.deleteById(id);
+                                    @RequestParam(name = "page", defaultValue = "0") int page,
+                                    @RequestParam(name = "keyword", defaultValue = "") String keyword) {
+        companyService.deleteCompanyById(id);
         return "redirect:/companies?page=" + page + "&keyword=" + keyword;
     }
 
