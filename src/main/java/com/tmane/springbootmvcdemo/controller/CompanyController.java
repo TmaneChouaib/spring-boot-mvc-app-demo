@@ -53,5 +53,12 @@ public class CompanyController {
         return "EditCompany";
     }
 
+    @DeleteMapping("/delete/{id}")
+    public String DeleteCompany(@PathVariable Long id,
+                                @RequestParam(name = "page", defaultValue = "0") int page,
+                                @RequestParam(name = "keyword", defaultValue = "") String keyWord) {
+        companyRepository.deleteById(id);
+        return "redirect:/companies?page=" + page + "&keyword=" + keyWord;
+    }
 
 }
