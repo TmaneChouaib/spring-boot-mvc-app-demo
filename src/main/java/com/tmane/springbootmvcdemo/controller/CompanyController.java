@@ -21,44 +21,44 @@ public class CompanyController {
     public String getAllCompanies(Model model,
                                   @RequestParam(name = "page", defaultValue = "0") int page,
                                   @RequestParam(name = "size", defaultValue = "5") int size,
-                                  @RequestParam(name = "keyword", defaultValue = "") String keyWord) {
+                                  @RequestParam(name = "keyword", defaultValue = "") String keyword) {
 
-        Page<Company> companyPage = companyService.findCompaniesByCEO(keyWord, PageRequest.of(page, size));
+        Page<Company> companyPage = companyService.findCompaniesByCEO(keyword, PageRequest.of(page, size));
         model.addAttribute("Companies", companyPage.getContent());
         model.addAttribute("pages", new int[companyPage.getTotalPages()]);
         model.addAttribute("currentPage", page);
-        model.addAttribute("keyWord", keyWord);
+        model.addAttribute("keyword", keyword);
 
         return "companies";
     }
 
     @GetMapping("/new")
-    public String AddCompany(@ModelAttribute("company") Company company) {
+    public String addCompanyForm(@ModelAttribute("company") Company company) {
         return "AddCompany";
     }
 
     @PostMapping("/save")
-    public String SaveCompany(@ModelAttribute("company") Company company,
+    public String saveCompany(@ModelAttribute("company") Company company,
                               @RequestParam(name = "page", defaultValue = "0") int page,
-                              @RequestParam(name = "keyword", defaultValue = "") String keyWord) {
+                              @RequestParam(name = "keyword", defaultValue = "") String keyword) {
 
         companyRepository.save(company);
-        return "redirect:/companies?page=" + page + "&keyword=" + keyWord;
+        return "redirect:/companies?page=" + page + "&keyword=" + keyword;
     }
 
     @GetMapping("/edit/{id}")
-    public String EditCompany(@PathVariable Long id, Model model) {
+    public String editCompanyForm(@PathVariable Long id, Model model) {
         Company company = companyRepository.findById(id).orElseThrow(() -> new RuntimeException("Company not found with id:" + id));
         model.addAttribute("company", company);
         return "EditCompany";
     }
 
     @DeleteMapping("/delete/{id}")
-    public String DeleteCompany(@PathVariable Long id,
+    public String deleteCompanyById(@PathVariable Long id,
                                 @RequestParam(name = "page", defaultValue = "0") int page,
-                                @RequestParam(name = "keyword", defaultValue = "") String keyWord) {
+                                @RequestParam(name = "keyword", defaultValue = "") String keyword) {
         companyRepository.deleteById(id);
-        return "redirect:/companies?page=" + page + "&keyword=" + keyWord;
+        return "redirect:/companies?page=" + page + "&keyword=" + keyword;
     }
 
 }
