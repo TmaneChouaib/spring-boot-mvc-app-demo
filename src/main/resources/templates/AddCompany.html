@@ -1,10 +1,86 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http//www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.2.3/css/bootstrap.min.css">
 </head>
 <body>
+<div layout:fragment="content">
+    <div class="container">
+        <form th:action="@{/companies/save}" th:object="${company}" method="post">
+            <div class="border mt-4 ps-2 pe-2 pb-2">
+                <div class="row">
+                    <div class="form-group col-6 mb-4 mt-4">
+                        <label for="name">name :</label>
+                        <input type="text" th:field="*{name}" placeholder="" id="name" name="name" class="form-control">
+                    </div>
+                    <div class="form-group col-6 mb-4 mt-4">
+                        <label for="name">address :</label>
+                        <input type="text" th:field="*{address}" placeholder="" id="address" name="address"
+                               class="form-control">
+                    </div>
+                    <div class="form-group col-6 mb-4">
+                        <label for="name">country :</label>
+                        <input type="text" th:field="*{country}" placeholder="" id="country" name="country"
+                               class="form-control">
+                    </div>
+                    <div class="form-group col-6 mb-4">
+                        <label for="name">city :</label>
+                        <input type="text" th:field="*{city}" placeholder="" id="city" name="city" class="form-control">
+                    </div>
+                    <div class="form-group col-6 mb-4">
+                        <label for="name">postalCode :</label>
+                        <input type="text" th:field="*{postalCode}" placeholder="" id="postalCode" name="postalCode"
+                               class="form-control">
+                    </div>
+                    <div class="form-group col-6 mb-4">
+                        <label for="name">CEO :</label>
+                        <input type="text" th:field="*{CEO}" placeholder="" id="CEO" name="CEO" class="form-control">
+                    </div>
+                    <div class="form-group col-6 mb-4">
+                        <label for="name">phoneNumber :</label>
+                        <input type="text" th:field="*{phoneNumber}" placeholder="" id="phoneNumber" name="phoneNumber"
+                               class="form-control">
+                    </div>
+                    <div class="form-group col-6 mb-4">
+                        <label for="name">email :</label>
+                        <input type="text" th:field="*{email}" placeholder="" id="email" name="email"
+                               class="form-control">
+                    </div>
+                    <div class="form-group col-6 mb-4">
+                        <label for="name">foundationDate :</label>
+                        <input type="date" th:field="*{foundationDate}" placeholder="" id="foundationDate"
+                               name="foundationDate" class="form-control">
+                    </div>
+                    <div class="form-group col-6 mb-4">
+                        <label for="name">revenue :</label>
+                        <input type="number" th:field="*{revenue}" placeholder="" id="revenue" name="revenue"
+                               class="form-control">
+                    </div>
+                    <div class="form-group col-6 mb-4">
+                        <label for="name">numberOfEmployees :</label>
+                        <input type="number" th:field="*{numberOfEmployees}" placeholder="" id="numberOfEmployees"
+                               name="numberOfEmployees" class="form-control">
+                    </div>
+                    <div class="form-group col-6 mb-4">
+                        <label for="name">fiscalCode :</label>
+                        <input type="number" th:field="*{fiscalCode}" placeholder="" id="fiscalCode"
+                               name="fiscalCode" class="form-control">
+                    </div>
+                </div>
+
+                <div class="row justify-content-end me-2">
+                    <button type="submit" class="btn btn-dark col-2">
+                        New
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
 </body>
 </html>
