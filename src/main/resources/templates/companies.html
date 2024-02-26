@@ -1,10 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http//www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.2.3/css/bootstrap.min.css">
 </head>
 <body>
-
+<div layout:fragment="content">
+    <div class="container mt-5">
+        <div class="card text-center">
+            <!--            <div class="d-flex justify-content-center border border-dark">
+                            <div class="col-md-12">
+                                <div class="container card-header bg-dark bg-subtle text-white h1">Companies</div>
+                            </div>
+                        </div>-->
+            <div class="card-body">
+                <form action="get">
+                    <label class="form-label">Key word</label>
+                    <input type="text" name="keyword" th:value="${keyword}">
+                    <button type="submit" class="btn btn-dark border-dark mb-2">Find</button>
+                </form>
+                <table class="table table-light table-striped border border-dark">
+                    <thead>
+                    <tr class="table table-dark text-white h5">
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>CEO</th>
+                        <th>revenue</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-center">
+                    <tr th:each="company:${companiesList}">
+                        <td class="border-dark border-end h5" th:text="${company.id}"></td>
+                        <td th:text="${company.name}"></td>
+                        <td th:text="${company.CEO}"></td>
+                        <td th:text="${company.revenue}"></td>
+                        <td class="bg-white border border-dark border-start"><a
+                                onclick="return confirm('Are you sure you want to delete this line?')"
+                                class="btn bg-danger bg-opacity-25 text-dark border-dark"
+                                th:href="@{deleteCompanyById(id=${company.id}, keyword=${keyword}, page=${currentPage})}">
+                            Delete</a>
+                            <a class="btn bg-info bg-opacity-25 text-dark border-dark ms-4"
+                               th:href="@{editCompanyForm(id=${company.id}, keyword=${keyword}, page=${currentPage})}">
+                                Update</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <ul class="nav nav-pills">
+            <li th:each="page,status:${pages}">
+                <a th:class="${status.index==currentPage?'btn btn-dark me-2':'btn btn-outline-dark me-2'}"
+                   th:text="${status.index}"
+                   th:href="@{index(page=${status.index},keyword=${keyword})}">
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
 </body>
 </html>
