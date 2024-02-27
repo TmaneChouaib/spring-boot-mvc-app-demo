@@ -11,7 +11,21 @@
 <div layout:fragment="content">
     <div class="row justify-content-center align-items-center">
         <div class="card mt-4 col-md-4 border-dark mb-3">
-            <div class="card-header">Détails</div>
+            <div class="row">
+                <div class=" col-md-8 card-header">Détails :</div>
+                <div class="col-md-4 card-header justify-content-end">
+                    <td class="border-dark border-end h5">
+                        <a class="btn btn-outline-dark border-dark"
+                           th:href="@{/companies}"> 🔙  ️</a>
+                        <a class="btn btn-outline-dark border-dark "
+                           th:href="@{/companies/edit/{id}(id=${company.id})}">
+                            ✒️</a>
+                        <a class="btn btn-outline-dark border-dark"
+                           th:href="@{/companies/delete/{id}(id=${company.id})}">
+                            🗑️</a>
+                    </td>
+                </div>
+            </div>
             <div class="card-body">
                 <p><strong> name : </strong><span th:text="${company.name}"></span></p>
                 <p><strong> address : </strong><span th:text="${company.address}"></span></p>
