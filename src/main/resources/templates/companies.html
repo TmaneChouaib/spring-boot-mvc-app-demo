@@ -34,7 +34,10 @@
                     </thead>
                     <tbody class="text-center">
                     <tr th:each="company:${companiesList}">
-                        <td class="border-dark border-end h5" th:text="${company.id}"></td>
+                        <td class="border-dark border-end h5" th:text="${company.id}">
+                            <a class="btn bg-danger bg-opacity-25 text-dark border-dark"
+                               th:href="@{/company/{id}(id=${company.id})}">👁️‍🗨️</a>
+                        </td>
                         <td th:text="${company.name}"></td>
                         <td th:text="${company.CEO}"></td>
                         <td th:text="${company.revenue}"></td>

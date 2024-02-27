@@ -67,4 +67,9 @@ public class CompanyServiceImpl implements CompanyService {
     public List<Company> findCompaniesByFoundationDateBetween(LocalDate startDate, LocalDate endDate) {
         return companyRepository.findByFoundationDateBetween(startDate, endDate);
     }
+
+    @Override
+    public Company getCompanyById(Long id) {
+        return companyRepository.findById(id).get();
+    }
 }

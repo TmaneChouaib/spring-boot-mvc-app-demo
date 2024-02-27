@@ -29,4 +29,6 @@ public interface CompanyService {
     public List<Company> findCompaniesByNumberOfEmployeesBetween(Integer minEmployees, Integer maxEmployees);
 
     public List<Company> findCompaniesByFoundationDateBetween(LocalDate startDate, LocalDate endDate);
+
+    public Company getCompanyById(Long id);
 }

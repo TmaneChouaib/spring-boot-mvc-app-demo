@@ -50,6 +50,12 @@ public class CompanyController {
         return "EditCompany";
     }
 
+    @GetMapping("/company")
+    public String detailCompany(@PathVariable Long id, Model model) {
+        model.addAttribute("company", companyService.getCompanyById(id));
+        return "company";
+    }
+
     @GetMapping("/delete/{id}")
     public String deleteCompanyById(@PathVariable Long id,
                                     @RequestParam(name = "page", defaultValue = "0") int page,
