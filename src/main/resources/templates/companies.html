@@ -34,17 +34,17 @@
                     </thead>
                     <tbody class="text-center">
                     <tr th:each="company:${companiesList}">
-                        <td class="border-dark border-end h5" th:text="${company.id}">
-                            <a class="btn bg-danger bg-opacity-25 text-dark border-dark"
-                               th:href="@{/company/{id}(id=${company.id})}">👁️‍🗨️</a>
+                        <td class="border-dark border-end h5">
+                            <a class="btn btn-outline-dark bg-opacity-25 text-dark border-dark"
+                               th:href="@{/companies/company/{id}(id=${company.id})}"> 👁️‍ ️</a>
                         </td>
                         <td th:text="${company.name}"></td>
                         <td th:text="${company.CEO}"></td>
                         <td th:text="${company.revenue}"></td>
-                        <td class="bg-white border border-dark border-start"><a
-                                class="btn bg-danger bg-opacity-25 text-dark border-dark"
-                                th:href="@{/companies/delete/{id}(id=${company.id})}">
-                            Delete</a>
+                        <td class="bg-white border border-dark border-start">
+                            <a class="btn bg-danger bg-opacity-25 text-dark border-dark"
+                               th:href="@{/companies/delete/{id}(id=${company.id})}">
+                                Delete</a>
                             <a class="btn bg-info bg-opacity-25 text-dark border-dark ms-4"
                                th:href="@{/companies/edit/{id}(id=${company.id})}">
                                 Update</a>

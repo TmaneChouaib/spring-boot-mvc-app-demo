@@ -50,7 +50,7 @@ public class CompanyController {
         return "EditCompany";
     }
 
-    @GetMapping("/company")
+    @GetMapping("/company/{id}")
     public String detailCompany(@PathVariable Long id, Model model) {
         model.addAttribute("company", companyService.getCompanyById(id));
         return "company";

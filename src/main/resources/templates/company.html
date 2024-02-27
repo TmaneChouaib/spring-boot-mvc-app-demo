@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http//www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.2.3/css/bootstrap.min.css">
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="row justify-content-center align-items-center">
+        <div class="card mt-4 col-md-4 border-dark mb-3">
+            <div class="card-header">Détails</div>
+            <div class="card-body">
+                <p><strong> name : </strong><span th:text="${company.name}"></span></p>
+                <p><strong> address : </strong><span th:text="${company.address}"></span></p>
+                <p><strong> country : </strong><span th:text="${company.country}"></span></p>
+                <p><strong> city : </strong><span th:text="${company.city}"></span></p>
+                <p><strong> postal Code : </strong><span th:text="${company.postalCode}"></span></p>
+                <p><strong> CEO : </strong><span th:text="${company.CEO}"></span></p>
+                <p><strong> phone Number : </strong><span th:text="${company.phoneNumber}"></span></p>
+                <p><strong> email : </strong><span th:text="${company.email}"></span></p>
+                <p><strong> foundation Date : </strong><span th:text="${company.foundationDate}"></span></p>
+                <p><strong> revenue : </strong><span th:text="${company.revenue}"></span></p>
+                <p><strong> number Of Employees : </strong><span th:text="${company.numberOfEmployees}"></span></p>
+                <p><strong> fiscal Code : </strong><span th:text="${company.fiscalCode}"></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
