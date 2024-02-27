@@ -39,7 +39,6 @@
                         <td th:text="${company.CEO}"></td>
                         <td th:text="${company.revenue}"></td>
                         <td class="bg-white border border-dark border-start"><a
-                                onclick="return confirm('Are you sure you want to delete this line?')"
                                 class="btn bg-danger bg-opacity-25 text-dark border-dark"
                                 th:href="@{/companies/delete/{id}(id=${company.id})}">
                             Delete</a>

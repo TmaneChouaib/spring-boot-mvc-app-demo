@@ -50,7 +50,7 @@ public class CompanyController {
         return "EditCompany";
     }
 
-    @DeleteMapping("/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String deleteCompanyById(@PathVariable Long id,
                                     @RequestParam(name = "page", defaultValue = "0") int page,
                                     @RequestParam(name = "keyword", defaultValue = "") String keyword) {
