@@ -15,10 +15,14 @@ import java.util.List;
 @RequestMapping("/companies")
 @AllArgsConstructor
 public class CompanyController {
+    private static final String COMPANIES_REDIRECT = "/companies";
+    private static final String COMPANIES_PAGE = "/companies/companies";
+    private static final String ADD_COMPANY_PAGE = "/companies/AddCompany";
+    private static final String EDIT_COMPANY_PAGE = "/companies/EditCompany";
+    private static final String VIEW_COMPANY_PAGE = "/companies/company";
     private CompanyService companyService;
 
     public int getLastPageNumber() {
-
         int pageSize = 5;
         Page<Company> page = companyService.findPaginated(1, pageSize);
 
@@ -52,41 +56,42 @@ public class CompanyController {
         model.addAttribute("companyList", companyList);
         model.addAttribute("keyword", keyword);
 
-
-        return "companies";
+        return COMPANIES_PAGE;
     }
 
     @GetMapping("/new")
     public String addCompanyForm(@ModelAttribute("company") Company company) {
-        return "AddCompany";
+
+        return ADD_COMPANY_PAGE;
     }
 
     @PostMapping("/save")
     public String saveCompany(@ModelAttribute("company") Company company) {
-
         companyService.saveCompany(company);
-        return "redirect:/companies/page/" + getLastPageNumber();
+
+        return "redirect:" + COMPANIES_REDIRECT + "/page/" + getLastPageNumber();
     }
 
     @GetMapping("/edit/{id}")
     public String editCompanyForm(@PathVariable Long id, Model model) {
         Company company = companyService.findCompanyById(id);
         model.addAttribute("company", company);
-        return "EditCompany";
+
+        return EDIT_COMPANY_PAGE;
     }
 
     @GetMapping("/company/{id}")
     public String detailCompany(@PathVariable Long id, Model model) {
         model.addAttribute("company", companyService.getCompanyById(id));
-        return "company";
+
+        return VIEW_COMPANY_PAGE;
     }
 
     @GetMapping("/delete/{id}")
     public String deleteCompanyById(@PathVariable Long id,
-                                    @RequestParam(name = "page", defaultValue = "0") int page,
-                                    @RequestParam(name = "keyword", defaultValue = "") String keyword) {
+                                    @RequestParam(name = "page", defaultValue = "0") int page) {
         companyService.deleteCompanyById(id);
-        return "redirect:/companies?page=" + page + "&keyword=" + keyword;
-    }
 
+        return "redirect:" + COMPANIES_REDIRECT + "?page=" + page;
+    }
 }
