@@ -4,6 +4,7 @@ import com.tmane.springbootmvcdemo.entity.Company;
 import com.tmane.springbootmvcdemo.service.CompanyService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,13 +17,25 @@ import java.util.List;
 public class CompanyController {
     private CompanyService companyService;
 
+    @GetMapping
+    public String HomePage(Model model) {
+        return getAllCompanies(model, 1, 5, "");
+    }
+
     @GetMapping("/page/{pageNum}")
     public String getAllCompanies(Model model,
                                   @PathVariable(value = "pageNum") int pageNum,
                                   @RequestParam(name = "size", defaultValue = "5") int size,
                                   @RequestParam(name = "keyword", defaultValue = "") String keyword) {
 
-        Page<Company> page = companyService.getAllCompanies(pageNum, size);
+        Page<Company> page;
+
+        if (keyword != null && !keyword.trim().isEmpty() && !"null".equalsIgnoreCase(keyword)) {
+            page = companyService.findCompaniesByCEO((keyword), PageRequest.of(pageNum - 1, size));
+        } else {
+            page = companyService.getAllCompanies(pageNum, size);
+        }
+
         List<Company> companyList = page.getContent();
 
         model.addAttribute("currentPage", pageNum);

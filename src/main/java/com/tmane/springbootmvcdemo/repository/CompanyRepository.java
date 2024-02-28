@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 public interface CompanyRepository extends JpaRepository<Company, Long> {
-    public Page<Company> findByCEO(String name, Pageable pageable);
+    public Page<Company> findByCEOContaining(String name, Pageable pageable);
 
     public List<Company> findByCountry(String country);
 

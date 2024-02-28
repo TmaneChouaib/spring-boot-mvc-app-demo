@@ -19,7 +19,7 @@
                             </div>
                         </div>-->
             <div class="card-body">
-                <form action="get">
+                <form method="get" th:action="@{/companies/page/1}">
                     <label class="form-label">Key word</label>
                     <input type="text" name="keyword" th:value="${keyword}">
                     <button type="submit" class="btn btn-dark border-dark mb-2">Find</button>
