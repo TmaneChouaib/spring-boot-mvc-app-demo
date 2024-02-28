@@ -19,11 +19,19 @@
                             </div>
                         </div>-->
             <div class="card-body">
-                <form method="get" th:action="@{/companies/page/1}">
-                    <label class="form-label">Key word</label>
-                    <input type="text" name="keyword" th:value="${keyword}">
-                    <button type="submit" class="btn btn-dark border-dark mb-2">Find</button>
-                </form>
+                <div class="row">
+                    <div class="col-8">
+
+                    </div>
+                    <div class="col-4">
+                        <form th:action="@{/companies/page/1}" method="get" >
+                            <label class="form-label">search :</label>
+                            <input type="text" name="keyword" th:value="${keyword}" placeholder="search by CEO name">
+                            <button type="submit" class="btn btn-dark border-dark mb-2">Find</button>
+                        </form>
+                    </div>
+                </div>
+
                 <table class="table table-white table-striped border border-dark">
                     <thead>
                     <tr class="table table-dark text-white h5">

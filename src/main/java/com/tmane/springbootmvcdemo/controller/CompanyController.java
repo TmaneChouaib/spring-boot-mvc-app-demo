@@ -17,23 +17,31 @@ import java.util.List;
 public class CompanyController {
     private CompanyService companyService;
 
+    public int getLastPageNumber() {
+
+        int pageSize = 5;
+        Page<Company> page = companyService.findPaginated(1, pageSize);
+
+        return page.getTotalPages();
+    }
+
     @GetMapping
     public String HomePage(Model model) {
-        return getAllCompanies(model, 1, 5, "");
+        return findPaginated(model, 1, 5, "");
     }
 
     @GetMapping("/page/{pageNum}")
-    public String getAllCompanies(Model model,
-                                  @PathVariable(value = "pageNum") int pageNum,
-                                  @RequestParam(name = "size", defaultValue = "5") int size,
-                                  @RequestParam(name = "keyword", defaultValue = "") String keyword) {
+    public String findPaginated(Model model,
+                                @PathVariable(value = "pageNum") int pageNum,
+                                @RequestParam(name = "size", defaultValue = "5") int size,
+                                @RequestParam(name = "keyword", defaultValue = "") String keyword) {
 
         Page<Company> page;
 
         if (keyword != null && !keyword.trim().isEmpty() && !"null".equalsIgnoreCase(keyword)) {
             page = companyService.findCompaniesByCEO((keyword), PageRequest.of(pageNum - 1, size));
         } else {
-            page = companyService.getAllCompanies(pageNum, size);
+            page = companyService.findPaginated(pageNum, size);
         }
 
         List<Company> companyList = page.getContent();
@@ -54,12 +62,10 @@ public class CompanyController {
     }
 
     @PostMapping("/save")
-    public String saveCompany(@ModelAttribute("company") Company company,
-                              @RequestParam(name = "page", defaultValue = "0") int page,
-                              @RequestParam(name = "keyword", defaultValue = "") String keyword) {
+    public String saveCompany(@ModelAttribute("company") Company company) {
 
         companyService.saveCompany(company);
-        return "redirect:/companies?page=" + page + "&keyword=" + keyword;
+        return "redirect:/companies/page/" + getLastPageNumber();
     }
 
     @GetMapping("/edit/{id}")

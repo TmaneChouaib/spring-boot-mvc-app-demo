@@ -16,7 +16,7 @@ public interface CompanyService {
 
     public Company findCompanyById(Long id);
 
-    public Page<Company> getAllCompanies(int pageNum, int pageSize);
+    public Page<Company> findPaginated(int pageNum, int pageSize);
 
     public Page<Company> findCompaniesByCEO(String name, Pageable pageable);
 
