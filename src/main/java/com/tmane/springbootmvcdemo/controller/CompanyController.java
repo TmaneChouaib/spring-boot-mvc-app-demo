@@ -8,23 +8,29 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/companies")
 @AllArgsConstructor
 public class CompanyController {
     private CompanyService companyService;
 
-    @GetMapping
+    @GetMapping("/page/{pageNum}")
     public String getAllCompanies(Model model,
-                                  @RequestParam(name = "page", defaultValue = "0") int page,
+                                  @PathVariable(value = "pageNum") int pageNum,
                                   @RequestParam(name = "size", defaultValue = "5") int size,
                                   @RequestParam(name = "keyword", defaultValue = "") String keyword) {
 
-        Page<Company> companyPage = companyService.getAllCompanies(page, size);
-        model.addAttribute("companiesList", companyPage.getContent());
-        model.addAttribute("pages", new int[companyPage.getTotalPages()]);
-        model.addAttribute("currentPage", page);
+        Page<Company> page = companyService.getAllCompanies(pageNum, size);
+        List<Company> companyList = page.getContent();
+
+        model.addAttribute("currentPage", pageNum);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalItems", page.getTotalElements());
+        model.addAttribute("companyList", companyList);
         model.addAttribute("keyword", keyword);
+
 
         return "companies";
     }

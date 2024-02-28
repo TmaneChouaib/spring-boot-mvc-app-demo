@@ -6,6 +6,8 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="/webjars/bootstrap/5.2.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/style.css">
+
 </head>
 <body>
 <div layout:fragment="content">
@@ -22,10 +24,10 @@
                     <input type="text" name="keyword" th:value="${keyword}">
                     <button type="submit" class="btn btn-dark border-dark mb-2">Find</button>
                 </form>
-                <table class="table table-light table-striped border border-dark">
+                <table class="table table-white table-striped border border-dark">
                     <thead>
                     <tr class="table table-dark text-white h5">
-                        <th>ID</th>
+                        <th class="border border-dark bg-white"></th>
                         <th>Name</th>
                         <th>CEO</th>
                         <th>revenue</th>
@@ -33,19 +35,19 @@
                     </tr>
                     </thead>
                     <tbody class="text-center">
-                    <tr th:each="company:${companiesList}">
+                    <tr th:each="company:${companyList}">
                         <td class="border-dark border-end h5">
-                            <a class="btn btn-outline-dark bg-opacity-25 text-dark border-dark"
+                            <a class="btn btn-outline-dark border-dark"
                                th:href="@{/companies/company/{id}(id=${company.id})}"> 👁️‍ ️</a>
                         </td>
                         <td th:text="${company.name}"></td>
                         <td th:text="${company.CEO}"></td>
                         <td th:text="${company.revenue}"></td>
                         <td class="bg-white border border-dark border-start">
-                            <a class="btn bg-danger bg-opacity-25 text-dark border-dark"
+                            <a class="btn btn-outline-dark border-dark"
                                th:href="@{/companies/delete/{id}(id=${company.id})}">
                                 Delete</a>
-                            <a class="btn bg-info bg-opacity-25 text-dark border-dark ms-4"
+                            <a class="btn btn-outline-dark border-dark ms-4"
                                th:href="@{/companies/edit/{id}(id=${company.id})}">
                                 Update</a>
                         </td>
@@ -54,16 +56,47 @@
                 </table>
             </div>
         </div>
-    </div>
-    <div class="d-flex justify-content-center">
-        <ul class="nav nav-pills">
-            <li th:each="page,status:${pages}">
-                <a th:class="${status.index==currentPage?'btn btn-dark me-2':'btn btn-outline-dark me-2'}"
-                   th:text="${status.index}"
-                   th:href="@{index(page=${status.index},keyword=${keyword})}">
-                </a>
-            </li>
-        </ul>
+        <div th:if="${totalPages>1}">
+            <span class="border border-dark border-top-0 text-dark">
+                 Total Rows:
+                <span class="fw-bold">
+                    [[${totalItems}]]
+                </span>
+                 Total Pages:
+                <span class="fw-bold">
+                    [[${totalPages}]]
+                </span>
+            </span>
+
+            <nav>
+                <ul class="pagination justify-content-center flex-wrap">
+                    <li class="page-item">
+                        <a th:if="${currentPage>1}" th:href="@{'/companies/page/1'}" class="page-link">
+                            First Page</a>
+                    </li>
+                    <li class="page-item">
+                        <a th:if="${currentPage>1}" th:href="@{'/companies/page/'+${currentPage -1}}"
+                           class="page-link">
+                            <<
+                        </a>
+                    </li>
+                    <li class="page-item"
+                        th:each="i: ${#numbers.sequence((currentPage>2)?(currentPage-2):1,(currentPage<totalPages-2)?(currentPage+2):totalPages)}">
+                        <a th:if="${currentPage!=i}" th:href="@{'/companies/page/'+${i}}"
+                           th:classappend="${currentPage==i}?'page-link active':'page-link'">[[${i}]]</a>
+                        <span th:if="${currentPage==i}" class="page-link active">[[${i}]]</span>
+                    </li>
+                    <li class="page-item">
+                        <a th:if="${currentPage<totalPages}"
+                           th:href="@{'/companies/page/' + ${currentPage+1}}" class="page-link">>></a>
+                    </li>
+                    <li class="page-item">
+                        <a th:if="${currentPage<totalPages}"
+                           th:href="@{'/companies/page/' + ${totalPages}}" class="page-link">Last Page</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </div>
 </div>
 </body>
