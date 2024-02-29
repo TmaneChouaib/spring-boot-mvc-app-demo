@@ -72,10 +72,21 @@ public class CompanyController {
         return "redirect:" + COMPANIES_REDIRECT + "/page/" + getLastPageNumber();
     }
 
+    @PostMapping("/update/{id}")
+    public String updateCompany(@ModelAttribute("company") Company company,
+                                @PathVariable Long id,
+                                @RequestParam(defaultValue = "1") int page) {
+        companyService.saveCompany(company);
+
+        return "redirect:" + COMPANIES_REDIRECT + "/page/" + page;
+    }
+
     @GetMapping("/edit/{id}")
-    public String editCompanyForm(@PathVariable Long id, Model model) {
+    public String editCompanyForm(@PathVariable Long id, Model model,
+                                  @RequestParam(value = "page", defaultValue = "1") int page) {
         Company company = companyService.findCompanyById(id);
         model.addAttribute("company", company);
+        model.addAttribute("page", page);
 
         return EDIT_COMPANY_PAGE;
     }

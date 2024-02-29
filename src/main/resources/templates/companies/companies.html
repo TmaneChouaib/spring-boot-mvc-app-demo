@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="/webjars/bootstrap/5.2.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="../../static/style.css">
 
 </head>
 <body>
@@ -56,7 +56,7 @@
                                th:href="@{/companies/delete/{id}(id=${company.id})}">
                                 Delete</a>
                             <a class="btn btn-outline-dark border-dark ms-4"
-                               th:href="@{/companies/edit/{id}(id=${company.id})}">
+                               th:href="@{/companies/edit/{id}(id=${company.id},page=${currentPage})}">
                                 Update</a>
                         </td>
                     </tr>

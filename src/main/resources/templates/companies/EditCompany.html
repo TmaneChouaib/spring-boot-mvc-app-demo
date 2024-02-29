@@ -10,7 +10,12 @@
 <body>
 <div layout:fragment="content">
     <div class="container">
-        <form th:action="@{/companies/save}" th:object="${company}" method="post">
+        <form th:action="@{/companies/update/{id}(id=${company.id},page=${page})}"
+              th:object="${company}" method="post">
+
+            <input type="hidden" th:name="id" th:value="${company.id}">
+            <input type="hidden" th:name="pageNum" th:value="${page}">
+
             <div class="border mt-4 ps-2 pe-2 pb-2">
                 <div class="row">
                     <input type="hidden" th:field="*{id}"/>
