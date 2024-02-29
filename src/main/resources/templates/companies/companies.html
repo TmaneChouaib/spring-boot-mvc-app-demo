@@ -13,29 +13,24 @@
 <div layout:fragment="content">
     <div class="container mt-5">
         <div class="card text-center">
-            <!--            <div class="d-flex justify-content-center border border-dark">
-                            <div class="col-md-12">
-                                <div class="container card-header bg-dark bg-subtle text-white h1">Companies</div>
-                            </div>
-                        </div>-->
             <div class="card-body">
                 <div class="row">
                     <div class="col-8">
 
                     </div>
                     <div class="col-4">
-                        <form th:action="@{/companies/page/1}" method="get" >
+                        <form th:action="@{/companies/page/1}" method="get">
                             <label class="form-label">search :</label>
-                            <input type="text" name="keyword" th:value="${keyword}" placeholder="search by CEO name">
-                            <button type="submit" class="btn btn-dark border-dark mb-2">Find</button>
+                            <input type="text" name="keyword" th:value="${keyword}" placeholder="search by company name">
+                            <button type="submit" class="btn btn-outline-dark border-dark mb-2"> 🔎</button>
                         </form>
                     </div>
                 </div>
 
                 <table class="table table-white table-striped border border-dark">
                     <thead>
-                    <tr class="table table-dark text-white h5">
-                        <th class="border border-dark bg-white"></th>
+                    <tr class="table bg-dark bg-opacity-75 bg-gradient text-white h5">
+                        <th class="border border-dark bg-dark bg-gradient"></th>
                         <th>Name</th>
                         <th>CEO</th>
                         <th>revenue</th>
@@ -44,7 +39,7 @@
                     </thead>
                     <tbody class="text-center">
                     <tr th:each="company:${companyList}">
-                        <td class="border-dark border-end h5">
+                        <td class="border-dark border-end bg-light bg-gradient h5">
                             <a class="btn btn-outline-dark border-dark"
                                th:href="@{/companies/company/{id}(id=${company.id})}"> 👁️‍ ️</a>
                         </td>
@@ -65,7 +60,7 @@
             </div>
         </div>
         <div th:if="${totalPages>1}">
-            <span class="border border-dark border-top-0 text-dark">
+            <span class="border border-dark border-top-0 text-dark pe-1">
                  Total Rows:
                 <span class="fw-bold">
                     [[${totalItems}]]

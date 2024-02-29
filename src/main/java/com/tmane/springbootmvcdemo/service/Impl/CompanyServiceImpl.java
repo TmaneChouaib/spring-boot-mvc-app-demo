@@ -39,8 +39,13 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public Page<Company> findCompaniesByCEO(String query, Pageable pageable) {
-        return companyRepository.findByCEOContaining(query, pageable);
+    public Page<Company> findCompaniesByName(String name, Pageable pageable) {
+        return companyRepository.findByNameContaining(name, pageable);
+    }
+
+    @Override
+    public Page<Company> findCompaniesByCEO(String name, Pageable pageable) {
+        return companyRepository.findByCEOContaining(name, pageable);
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.tmane.springbootmvcdemo.service;
 
 import com.tmane.springbootmvcdemo.entity.Company;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDate;
@@ -17,6 +18,7 @@ public interface CompanyService {
     public Company findCompanyById(Long id);
 
     public Page<Company> findPaginated(int pageNum, int pageSize);
+    Page<Company> findCompaniesByName(String name, Pageable pageable);
 
     public Page<Company> findCompaniesByCEO(String name, Pageable pageable);
 
@@ -31,4 +33,5 @@ public interface CompanyService {
     public List<Company> findCompaniesByFoundationDateBetween(LocalDate startDate, LocalDate endDate);
 
     public Company getCompanyById(Long id);
+
 }

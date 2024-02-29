@@ -43,7 +43,7 @@ public class CompanyController {
         Page<Company> page;
 
         if (keyword != null && !keyword.trim().isEmpty() && !"null".equalsIgnoreCase(keyword)) {
-            page = companyService.findCompaniesByCEO((keyword), PageRequest.of(pageNum - 1, size));
+            page = companyService.findCompaniesByName((keyword), PageRequest.of(pageNum - 1, size));
         } else {
             page = companyService.findPaginated(pageNum, size);
         }

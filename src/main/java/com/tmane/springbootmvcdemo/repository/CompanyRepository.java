@@ -13,6 +13,8 @@ import java.util.List;
 public interface CompanyRepository extends JpaRepository<Company, Long> {
     public Page<Company> findByCEOContaining(String name, Pageable pageable);
 
+    public Page<Company> findByNameContaining(String name, Pageable pageable);
+
     public List<Company> findByCountry(String country);
 
     public List<Company> findByCity(String city);
