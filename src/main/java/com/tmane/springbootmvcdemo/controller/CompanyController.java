@@ -30,15 +30,16 @@ public class CompanyController {
     }
 
     @GetMapping
-    public String HomePage(Model model) {
-        return findPaginated(model, 1, 5, "");
+    public String HomePage(Model model,
+                           @RequestParam(value = "keyword", required = false) String keyword) {
+        return findPaginated(model, 1, 5, keyword);
     }
 
     @GetMapping("/page/{pageNum}")
     public String findPaginated(Model model,
                                 @PathVariable(value = "pageNum") int pageNum,
                                 @RequestParam(name = "size", defaultValue = "5") int size,
-                                @RequestParam(name = "keyword", defaultValue = "") String keyword) {
+                                @RequestParam(name = "keyword", required = false) String keyword) {
 
         Page<Company> page;
 
@@ -75,18 +76,21 @@ public class CompanyController {
     @PostMapping("/update/{id}")
     public String updateCompany(@ModelAttribute("company") Company company,
                                 @PathVariable Long id,
+                                @RequestParam(value = "keyword", required = false) String keyword,
                                 @RequestParam(defaultValue = "1") int page) {
         companyService.saveCompany(company);
 
-        return "redirect:" + COMPANIES_REDIRECT + "/page/" + page;
+        return "redirect:" + COMPANIES_REDIRECT + "/page/" + page + "?keyword=" + (keyword == null ? "" : keyword);
     }
 
     @GetMapping("/edit/{id}")
     public String editCompanyForm(@PathVariable Long id, Model model,
+                                  @RequestParam(value = "keyword", required = false) String keyword,
                                   @RequestParam(value = "page", defaultValue = "1") int page) {
         Company company = companyService.findCompanyById(id);
         model.addAttribute("company", company);
         model.addAttribute("page", page);
+        model.addAttribute(("keyword"), keyword);
 
         return EDIT_COMPANY_PAGE;
     }

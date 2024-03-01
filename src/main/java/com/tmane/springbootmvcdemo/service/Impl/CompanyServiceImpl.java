@@ -34,7 +34,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public Page<Company> findPaginated(int pageNum, int pageSize) {
-        Pageable pageable = PageRequest.of(pageNum - 0, pageSize);
+        Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
         return companyRepository.findAll(pageable);
     }
 
