@@ -47,10 +47,10 @@
                         <td th:text="${company.CEO}"></td>
                         <td th:text="${company.revenue}"></td>
                         <td class="bg-white border border-dark border-start">
-                            <a class="btn btn-outline-dark border-dark"
+                            <a class="btn bg-danger bg-gradient bg-opacity-50 btn-outline-dark border-dark"
                                th:href="@{/companies/delete/{id}(id=${company.id})}">
                                 Delete</a>
-                            <a class="btn btn-outline-dark border-dark ms-4"
+                            <a class="btn bg-success bg-gradient bg-opacity-50 btn-outline-dark border-dark ms-4"
                                th:href="@{/companies/edit/{id}(id=${company.id},keyword=${keyword},page=${currentPage})}">
                                 Update</a>
                         </td>
