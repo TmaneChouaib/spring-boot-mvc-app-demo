@@ -1,0 +1,18 @@
+.page-link {
+    background-color: #000000;
+    color: white;
+}
+
+.page-link:hover {
+    background-color: #f5eef8;
+    color: #000000;
+    transform: scale(1.2);
+    transition: transform 0.3s ease;
+}
+
+.page-link.active {
+    background-color: #f5eef8;
+    color: #000000;
+    border-color: #000000;
+    transform: scale(1.2);
+}

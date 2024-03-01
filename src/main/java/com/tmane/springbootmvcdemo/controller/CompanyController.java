@@ -20,33 +20,36 @@ public class CompanyController {
     private static final String ADD_COMPANY_PAGE = "/companies/AddCompany";
     private static final String EDIT_COMPANY_PAGE = "/companies/EditCompany";
     private static final String VIEW_COMPANY_PAGE = "/companies/company";
+
+    private static final int PAGE_SIZE = 10;
     private CompanyService companyService;
 
+
     public int getLastPageNumber() {
-        int pageSize = 5;
-        Page<Company> page = companyService.findPaginated(1, pageSize);
+        Page<Company> page = companyService.findPaginated(1, PAGE_SIZE);
 
         return page.getTotalPages();
     }
 
+
     @GetMapping
     public String HomePage(Model model,
                            @RequestParam(value = "keyword", required = false) String keyword) {
-        return findPaginated(model, 1, 5, keyword);
+        return findPaginated(model, 1, keyword);
     }
+
 
     @GetMapping("/page/{pageNum}")
     public String findPaginated(Model model,
                                 @PathVariable(value = "pageNum") int pageNum,
-                                @RequestParam(name = "size", defaultValue = "5") int size,
                                 @RequestParam(name = "keyword", required = false) String keyword) {
 
         Page<Company> page;
 
         if (keyword != null && !keyword.trim().isEmpty() && !"null".equalsIgnoreCase(keyword)) {
-            page = companyService.findCompaniesByName((keyword), PageRequest.of(pageNum - 1, size));
+            page = companyService.findCompaniesByName((keyword), PageRequest.of(pageNum - 1, PAGE_SIZE));
         } else {
-            page = companyService.findPaginated(pageNum, size);
+            page = companyService.findPaginated(pageNum, PAGE_SIZE);
         }
 
         List<Company> companyList = page.getContent();
@@ -60,11 +63,13 @@ public class CompanyController {
         return COMPANIES_PAGE;
     }
 
+
     @GetMapping("/new")
     public String addCompanyForm(@ModelAttribute("company") Company company) {
 
         return ADD_COMPANY_PAGE;
     }
+
 
     @PostMapping("/save")
     public String saveCompany(@ModelAttribute("company") Company company) {
@@ -72,6 +77,7 @@ public class CompanyController {
 
         return "redirect:" + COMPANIES_REDIRECT + "/page/" + getLastPageNumber();
     }
+
 
     @PostMapping("/update/{id}")
     public String updateCompany(@ModelAttribute("company") Company company,
@@ -82,6 +88,7 @@ public class CompanyController {
 
         return "redirect:" + COMPANIES_REDIRECT + "/page/" + page + "?keyword=" + (keyword == null ? "" : keyword);
     }
+
 
     @GetMapping("/edit/{id}")
     public String editCompanyForm(@PathVariable Long id, Model model,
@@ -95,12 +102,14 @@ public class CompanyController {
         return EDIT_COMPANY_PAGE;
     }
 
+
     @GetMapping("/company/{id}")
     public String detailCompany(@PathVariable Long id, Model model) {
         model.addAttribute("company", companyService.getCompanyById(id));
 
         return VIEW_COMPANY_PAGE;
     }
+
 
     @GetMapping("/delete/{id}")
     public String deleteCompanyById(@PathVariable Long id,
