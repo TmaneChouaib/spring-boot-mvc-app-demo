@@ -74,28 +74,28 @@
             <nav>
                 <ul class="pagination justify-content-center flex-wrap">
                     <li class="page-item">
-                        <a th:if="${currentPage>1}" th:href="@{'/companies/page/1'}" class="page-link">
+                        <a th:if="${currentPage>1}" th:href="@{'/companies/page/1?keyword='+${keyword}}" class="page-link">
                             First Page</a>
                     </li>
                     <li class="page-item">
-                        <a th:if="${currentPage>1}" th:href="@{'/companies/page/'+${currentPage -1}}"
+                        <a th:if="${currentPage>1}" th:href="@{'/companies/page/'+${currentPage -1}+'?keyword='+${keyword}}"
                            class="page-link">
                             <<
                         </a>
                     </li>
                     <li class="page-item"
                         th:each="i: ${#numbers.sequence((currentPage>2)?(currentPage-2):1,(currentPage<totalPages-2)?(currentPage+2):totalPages)}">
-                        <a th:if="${currentPage!=i}" th:href="@{'/companies/page/'+${i}}"
+                        <a th:if="${currentPage!=i}" th:href="@{'/companies/page/'+${i}+'?keyword='+${keyword}}"
                            th:classappend="${currentPage==i}?'page-link active':'page-link'">[[${i}]]</a>
                         <span th:if="${currentPage==i}" class="page-link active">[[${i}]]</span>
                     </li>
                     <li class="page-item">
                         <a th:if="${currentPage<totalPages}"
-                           th:href="@{'/companies/page/' + ${currentPage+1}}" class="page-link">>></a>
+                           th:href="@{'/companies/page/' + ${currentPage+1}+'?keyword='+${keyword}}" class="page-link">>></a>
                     </li>
                     <li class="page-item">
                         <a th:if="${currentPage<totalPages}"
-                           th:href="@{'/companies/page/' + ${totalPages}}" class="page-link">Last Page</a>
+                           th:href="@{'/companies/page/' + ${totalPages}+'?keyword='+${keyword}}" class="page-link">Last Page</a>
                     </li>
                 </ul>
             </nav>
