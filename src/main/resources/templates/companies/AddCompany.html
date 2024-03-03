@@ -12,9 +12,9 @@
 <body>
 <div layout:fragment="content">
     <div class="container">
-        <form th:action="@{/companies/save}" th:object="${company}" method="post">
+        <form th:action="@{/companies}" th:object="${company}" method="post">
             <div class="border mt-4 ps-2 pe-2 pb-2">
-                <h2 class="border bg-success bg-opacity-25">New</h2>
+                <h2 class="border bg-dark bg-opacity-25 text-info">New</h2>
                 <div class="row">
                     <div class="form-group col-6 mb-4 mt-4">
                         <label for="name">name :</label>

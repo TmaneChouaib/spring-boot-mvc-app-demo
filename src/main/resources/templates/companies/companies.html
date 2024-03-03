@@ -11,7 +11,10 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="container mt-5">
+    <div class="container mt-3">
+        <div class="text-end">
+            <a class="btn btn-outline-dark border-dark mb-2" th:href="@{/companies/new}">Add new company</a>
+        </div>
         <div class="card text-center">
             <div class="card-body">
                 <div class="row">
@@ -20,8 +23,9 @@
                     </div>
                     <div class="col-4">
                         <form th:action="@{/companies/page/1}" method="get">
-                            <label class="form-label">search :</label>
-                            <input type="text" name="keyword" th:value="${keyword}" placeholder="search by company name">
+                            <label class="form-label">Search :</label>
+                            <input type="text" name="keyword" th:value="${keyword}"
+                                   placeholder="search by company name">
                             <button type="submit" class="btn btn-outline-dark border-dark mb-2"> 🔎</button>
                         </form>
                     </div>
@@ -41,17 +45,17 @@
                     <tr th:each="company:${companyList}">
                         <td class="border-dark border-end bg-light bg-gradient h5">
                             <a class="btn btn-outline-dark border-dark"
-                               th:href="@{/companies/company/{id}(id=${company.id})}"> 👁️‍ ️</a>
+                               th:href="@{/companies/{id}(id=${company.id})}"> 👁️‍ ️</a>
                         </td>
                         <td th:text="${company.name}"></td>
                         <td th:text="${company.CEO}"></td>
                         <td th:text="${company.revenue}"></td>
                         <td class="bg-white border border-dark border-start">
                             <a class="btn bg-danger bg-gradient bg-opacity-50 btn-outline-dark border-dark"
-                               th:href="@{/companies/delete/{id}(id=${company.id})}">
+                               th:href="@{/companies/{id}/delete(id=${company.id})}">
                                 Delete</a>
                             <a class="btn bg-success bg-gradient bg-opacity-50 btn-outline-dark border-dark ms-4"
-                               th:href="@{/companies/edit/{id}(id=${company.id},keyword=${keyword},page=${currentPage})}">
+                               th:href="@{/companies/{id}/edit(id=${company.id},keyword=${keyword},page=${currentPage})}">
                                 Update</a>
                         </td>
                     </tr>
@@ -74,11 +78,13 @@
             <nav>
                 <ul class="pagination justify-content-center flex-wrap">
                     <li class="page-item">
-                        <a th:if="${currentPage>1}" th:href="@{'/companies/page/1?keyword='+${keyword}}" class="page-link">
+                        <a th:if="${currentPage>1}" th:href="@{'/companies/page/1?keyword='+${keyword}}"
+                           class="page-link">
                             First Page</a>
                     </li>
                     <li class="page-item">
-                        <a th:if="${currentPage>1}" th:href="@{'/companies/page/'+${currentPage -1}+'?keyword='+${keyword}}"
+                        <a th:if="${currentPage>1}"
+                           th:href="@{'/companies/page/'+${currentPage -1}+'?keyword='+${keyword}}"
                            class="page-link">
                             <<
                         </a>
@@ -95,7 +101,8 @@
                     </li>
                     <li class="page-item">
                         <a th:if="${currentPage<totalPages}"
-                           th:href="@{'/companies/page/' + ${totalPages}+'?keyword='+${keyword}}" class="page-link">Last Page</a>
+                           th:href="@{'/companies/page/' + ${totalPages}+'?keyword='+${keyword}}" class="page-link">Last
+                            Page</a>
                     </li>
                 </ul>
             </nav>

@@ -18,8 +18,14 @@ public class CompanyServiceImpl implements CompanyService {
     private CompanyRepository companyRepository;
 
     @Override
-    public Company saveCompany(Company company) {
-        return companyRepository.save(company);
+    public Page<Company> findPaginatedCompanies(int pageNum, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
+        return companyRepository.findAll(pageable);
+    }
+
+    @Override
+    public void saveCompany(Company company) {
+        companyRepository.save(company);
     }
 
     @Override
@@ -33,18 +39,12 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public Page<Company> findPaginated(int pageNum, int pageSize) {
-        Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
-        return companyRepository.findAll(pageable);
-    }
-
-    @Override
-    public Page<Company> findCompaniesByName(String name, Pageable pageable) {
+    public Page<Company> findPaginatedCompaniesByName(String name, Pageable pageable) {
         return companyRepository.findByNameContaining(name, pageable);
     }
 
     @Override
-    public Page<Company> findCompaniesByCEO(String name, Pageable pageable) {
+    public Page<Company> findPaginatedCompaniesByCEO(String name, Pageable pageable) {
         return companyRepository.findByCEOContaining(name, pageable);
     }
 
@@ -71,10 +71,5 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public List<Company> findCompaniesByFoundationDateBetween(LocalDate startDate, LocalDate endDate) {
         return companyRepository.findByFoundationDateBetween(startDate, endDate);
-    }
-
-    @Override
-    public Company getCompanyById(Long id) {
-        return companyRepository.findById(id).get();
     }
 }

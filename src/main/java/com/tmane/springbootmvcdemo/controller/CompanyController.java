@@ -20,36 +20,35 @@ public class CompanyController {
     private static final String ADD_COMPANY_PAGE = "/companies/AddCompany";
     private static final String EDIT_COMPANY_PAGE = "/companies/EditCompany";
     private static final String VIEW_COMPANY_PAGE = "/companies/company";
-
     private static final int PAGE_SIZE = 10;
-    private CompanyService companyService;
+    private final CompanyService companyService;
 
 
-    public int getLastPageNumber() {
-        Page<Company> page = companyService.findPaginated(1, PAGE_SIZE);
+    public int retrieveLastPageNumber() {
+        Page<Company> page = companyService.findPaginatedCompanies(1, PAGE_SIZE);
 
         return page.getTotalPages();
     }
 
 
     @GetMapping
-    public String HomePage(Model model,
-                           @RequestParam(value = "keyword", required = false) String keyword) {
-        return findPaginated(model, 1, keyword);
+    public String displayHomePage(Model model,
+                                  @RequestParam(value = "keyword", required = false) String keyword) {
+        return displayPaginatedCompanies(model, 1, keyword);
     }
 
 
     @GetMapping("/page/{pageNum}")
-    public String findPaginated(Model model,
-                                @PathVariable(value = "pageNum") int pageNum,
-                                @RequestParam(name = "keyword", required = false) String keyword) {
+    public String displayPaginatedCompanies(Model model,
+                                            @PathVariable(value = "pageNum") int pageNum,
+                                            @RequestParam(name = "keyword", required = false) String keyword) {
 
         Page<Company> page;
 
         if (keyword != null && !keyword.trim().isEmpty() && !"null".equalsIgnoreCase(keyword)) {
-            page = companyService.findCompaniesByName((keyword), PageRequest.of(pageNum - 1, PAGE_SIZE));
+            page = companyService.findPaginatedCompaniesByName((keyword), PageRequest.of(pageNum - 1, PAGE_SIZE));
         } else {
-            page = companyService.findPaginated(pageNum, PAGE_SIZE);
+            page = companyService.findPaginatedCompanies(pageNum, PAGE_SIZE);
         }
 
         List<Company> companyList = page.getContent();
@@ -65,21 +64,22 @@ public class CompanyController {
 
 
     @GetMapping("/new")
-    public String addCompanyForm(@ModelAttribute("company") Company company) {
+    public String displayAddCompanyForm(Model model) {
+        model.addAttribute("company", new Company());
 
         return ADD_COMPANY_PAGE;
     }
 
 
-    @PostMapping("/save")
+    @PostMapping
     public String saveCompany(@ModelAttribute("company") Company company) {
         companyService.saveCompany(company);
 
-        return "redirect:" + COMPANIES_REDIRECT + "/page/" + getLastPageNumber();
+        return "redirect:" + COMPANIES_REDIRECT + "/page/" + retrieveLastPageNumber();
     }
 
 
-    @PostMapping("/update/{id}")
+    @PostMapping("/{id}/update")
     public String updateCompany(@ModelAttribute("company") Company company,
                                 @PathVariable Long id,
                                 @RequestParam(value = "keyword", required = false) String keyword,
@@ -90,10 +90,10 @@ public class CompanyController {
     }
 
 
-    @GetMapping("/edit/{id}")
-    public String editCompanyForm(@PathVariable Long id, Model model,
-                                  @RequestParam(value = "keyword", required = false) String keyword,
-                                  @RequestParam(value = "page", defaultValue = "1") int page) {
+    @GetMapping("/{id}/edit")
+    public String displayEditCompanyForm(@PathVariable Long id, Model model,
+                                         @RequestParam(value = "keyword", required = false) String keyword,
+                                         @RequestParam(value = "page", defaultValue = "1") int page) {
         Company company = companyService.findCompanyById(id);
         model.addAttribute("company", company);
         model.addAttribute("page", page);
@@ -103,17 +103,17 @@ public class CompanyController {
     }
 
 
-    @GetMapping("/company/{id}")
-    public String detailCompany(@PathVariable Long id, Model model) {
-        model.addAttribute("company", companyService.getCompanyById(id));
+    @GetMapping("/{id}")
+    public String displayCompanyDetails(@PathVariable Long id, Model model) {
+        model.addAttribute("company", companyService.findCompanyById(id));
 
         return VIEW_COMPANY_PAGE;
     }
 
 
-    @GetMapping("/delete/{id}")
-    public String deleteCompanyById(@PathVariable Long id,
-                                    @RequestParam(name = "page", defaultValue = "0") int page) {
+    @GetMapping("/{id}/delete")
+    public String deleteCompany(@PathVariable Long id,
+                                @RequestParam(name = "page", defaultValue = "0") int page) {
         companyService.deleteCompanyById(id);
 
         return "redirect:" + COMPANIES_REDIRECT + "?page=" + page;
