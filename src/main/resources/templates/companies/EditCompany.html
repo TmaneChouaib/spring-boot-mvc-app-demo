@@ -20,7 +20,7 @@
             <input type="hidden" th:name="keyword" th:value="${keyword}">
 
             <div class="border mt-4 ps-2 pe-2 pb-2">
-                <h2 class="border bg-dark bg-opacity-25 text-success">Update</h2>
+                <h2 class="border bg-dark bg-opacity-25 text-info">Update</h2>
                 <div class="row">
                     <input type="hidden" th:field="*{id}"/>
                     <div class="form-group col-6 mb-4 mt-4">
@@ -79,6 +79,15 @@
                         <label for="name">fiscalCode :</label>
                         <input type="number" th:field="*{fiscalCode}" placeholder="" id="fiscalCode"
                                name="fiscalCode" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-12 mb-4">
+                        <label for="sector">Sector: </label>
+                        <select th:field="*{sector}" id="sector" class="form-select">
+                            <option th:each="sector:${sectors}" th:value="${sector}"
+                                    th:text="${#strings.capitalize(sector.toString().replace('_',' '))}"></option>
+                        </select>
                     </div>
                 </div>
 

@@ -18,10 +18,10 @@
                 <div class="col-md-4 card-header justify-content-end">
                     <td class="border-dark border-end h5">
                         <a class="btn btn-outline-dark border-dark"
-                           th:href="@{/templates/companies}"> 🔙  ️</a>
+                           th:href="@{/templates/companies}"> 🔙 ️</a>
                         <a class="btn btn-outline-dark border-dark "
                            th:href="@{/companies/edit/{id}(id=${company.id})}">
-                            ✒️</a>
+                            📝</a>
                         <a class="btn btn-outline-dark border-dark"
                            th:href="@{/companies/delete/{id}(id=${company.id})}">
                             🗑️</a>
@@ -41,6 +41,8 @@
                 <p><strong> revenue : </strong><span th:text="${company.revenue}"></span></p>
                 <p><strong> number Of Employees : </strong><span th:text="${company.numberOfEmployees}"></span></p>
                 <p><strong> fiscal Code : </strong><span th:text="${company.fiscalCode}"></span></p>
+                <p><strong> Sector : </strong>
+                    <span th:if="${company.sector != null}" th:text="${#strings.capitalize(company.sector.toString().replace('_',' '))}"></span></p>
             </div>
         </div>
     </div>

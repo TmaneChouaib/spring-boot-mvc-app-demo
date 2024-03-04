@@ -1,4 +1,4 @@
-package com.tmane.springbootmvcdemo.entity;
+package com.tmane.springbootmvcdemo.enums;
 
 public enum Sector {
     INFORMATION_TECHNOLOGY,

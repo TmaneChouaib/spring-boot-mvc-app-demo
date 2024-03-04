@@ -1,6 +1,7 @@
 package com.tmane.springbootmvcdemo.controller;
 
 import com.tmane.springbootmvcdemo.entity.Company;
+import com.tmane.springbootmvcdemo.enums.Sector;
 import com.tmane.springbootmvcdemo.service.CompanyService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -30,13 +31,11 @@ public class CompanyController {
         return page.getTotalPages();
     }
 
-
     @GetMapping
     public String displayHomePage(Model model,
                                   @RequestParam(value = "keyword", required = false) String keyword) {
         return displayPaginatedCompanies(model, 1, keyword);
     }
-
 
     @GetMapping("/page/{pageNum}")
     public String displayPaginatedCompanies(Model model,
@@ -62,14 +61,13 @@ public class CompanyController {
         return COMPANIES_PAGE;
     }
 
-
     @GetMapping("/new")
     public String displayAddCompanyForm(Model model) {
         model.addAttribute("company", new Company());
+        model.addAttribute("sectors", Sector.values());
 
         return ADD_COMPANY_PAGE;
     }
-
 
     @PostMapping
     public String saveCompany(@ModelAttribute("company") Company company) {
@@ -77,7 +75,6 @@ public class CompanyController {
 
         return "redirect:" + COMPANIES_REDIRECT + "/page/" + retrieveLastPageNumber();
     }
-
 
     @PostMapping("/{id}/update")
     public String updateCompany(@ModelAttribute("company") Company company,
@@ -89,19 +86,18 @@ public class CompanyController {
         return "redirect:" + COMPANIES_REDIRECT + "/page/" + page + "?keyword=" + (keyword == null ? "" : keyword);
     }
 
-
     @GetMapping("/{id}/edit")
     public String displayEditCompanyForm(@PathVariable Long id, Model model,
                                          @RequestParam(value = "keyword", required = false) String keyword,
                                          @RequestParam(value = "page", defaultValue = "1") int page) {
         Company company = companyService.findCompanyById(id);
         model.addAttribute("company", company);
+        model.addAttribute("sectors", Sector.values());
         model.addAttribute("page", page);
         model.addAttribute(("keyword"), keyword);
 
         return EDIT_COMPANY_PAGE;
     }
-
 
     @GetMapping("/{id}")
     public String displayCompanyDetails(@PathVariable Long id, Model model) {
@@ -109,7 +105,6 @@ public class CompanyController {
 
         return VIEW_COMPANY_PAGE;
     }
-
 
     @GetMapping("/{id}/delete")
     public String deleteCompany(@PathVariable Long id,
