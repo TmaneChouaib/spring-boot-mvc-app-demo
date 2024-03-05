@@ -18,12 +18,12 @@
                 <div class="col-md-4 card-header justify-content-end">
                     <td class="border-dark border-end h5">
                         <a class="btn btn-outline-dark border-dark"
-                           th:href="@{/templates/companies}"> 🔙 ️</a>
+                           th:href="@{/companies}"> 🔙 ️</a>
                         <a class="btn btn-outline-dark border-dark "
-                           th:href="@{/companies/edit/{id}(id=${company.id})}">
+                           th:href="@{/companies/{id}/edit(id=${company.id})}">
                             📝</a>
                         <a class="btn btn-outline-dark border-dark"
-                           th:href="@{/companies/delete/{id}(id=${company.id})}">
+                           th:href="@{/companies/{id}/delete(id=${company.id})}">
                             🗑️</a>
                     </td>
                 </div>

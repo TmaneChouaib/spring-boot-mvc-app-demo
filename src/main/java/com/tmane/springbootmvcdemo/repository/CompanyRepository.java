@@ -11,17 +11,18 @@ import java.util.List;
 
 @Repository
 public interface CompanyRepository extends JpaRepository<Company, Long> {
-    public Page<Company> findByCEOContaining(String name, Pageable pageable);
 
-    public Page<Company> findByNameContaining(String name, Pageable pageable);
+    Page<Company> findByCEOContaining(String name, Pageable pageable);
 
-    public List<Company> findByCountry(String country);
+    Page<Company> findByNameContaining(String name, Pageable pageable);
 
-    public List<Company> findByCity(String city);
+    List<Company> findByCountry(String country);
 
-    public List<Company> findByRevenueBetween(Double minRevenu, Double maxRevenu);
+    List<Company> findByCity(String city);
 
-    public List<Company> findByNumberOfEmployeesBetween(Integer minEmployees, Integer maxEmployees);
+    List<Company> findByRevenueBetween(Double minRevenu, Double maxRevenu);
 
-    public List<Company> findByFoundationDateBetween(LocalDate startDate, LocalDate endDate);
+    List<Company> findByNumberOfEmployeesBetween(Integer minEmployees, Integer maxEmployees);
+
+    List<Company> findByFoundationDateBetween(LocalDate startDate, LocalDate endDate);
 }
