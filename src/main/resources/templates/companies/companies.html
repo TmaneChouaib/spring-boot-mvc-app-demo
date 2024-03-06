@@ -48,16 +48,16 @@
                             <a class="btn btn-outline-dark border-dark"
                                th:href="@{/companies/{id}(id=${company.id})}"> 👁️‍ ️</a>
                         </td>
-                        <td th:text="${company.name}"></td>
-                        <td th:text="${company.CEO}"></td>
-                        <td th:text="${company.revenue}"></td>
+                        <td class="border border-dark" th:text="${company.name}"></td>
+                        <td class="border border-dark" th:text="${company.CEO}"></td>
+                        <td class="border border-dark" th:text="${company.revenue}"></td>
                         <td class="bg-white border border-dark border-start">
-                            <a class="btn bg-danger bg-gradient bg-opacity-50 btn-outline-dark border-dark"
-                               th:href="@{/companies/{id}/delete(id=${company.id})}">
-                                Delete</a>
                             <a class="btn bg-info bg-gradient bg-opacity-50 btn-outline-dark border-dark ms-4"
                                th:href="@{/companies/{id}/edit(id=${company.id},keyword=${keyword},page=${currentPage})}">
                                 Update</a>
+                            <a class="btn bg-danger bg-gradient bg-opacity-50 btn-outline-dark border-dark"
+                               th:href="@{/companies/{id}/delete(id=${company.id})}">
+                                Delete</a>
                         </td>
                     </tr>
                     </tbody>
