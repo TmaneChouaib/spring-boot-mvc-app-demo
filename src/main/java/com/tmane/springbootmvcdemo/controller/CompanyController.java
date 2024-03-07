@@ -61,6 +61,13 @@ public class CompanyController {
         return COMPANIES_PAGE;
     }
 
+    @GetMapping("/{id}")
+    public String displayCompanyDetails(@PathVariable Long id, Model model) {
+        model.addAttribute("company", companyService.findCompanyById(id));
+
+        return VIEW_COMPANY_PAGE;
+    }
+
     @GetMapping("/new")
     public String displayAddCompanyForm(Model model) {
         model.addAttribute("company", new Company());
@@ -76,16 +83,6 @@ public class CompanyController {
         return "redirect:" + COMPANIES_REDIRECT + "/page/" + retrieveLastPageNumber();
     }
 
-    @PostMapping("/{id}/update")
-    public String updateCompany(@ModelAttribute("company") Company company,
-                                @PathVariable Long id,
-                                @RequestParam(value = "keyword", required = false) String keyword,
-                                @RequestParam(defaultValue = "1") int page) {
-        companyService.saveCompany(company);
-
-        return "redirect:" + COMPANIES_REDIRECT + "/page/" + page + "?keyword=" + (keyword == null ? "" : keyword);
-    }
-
     @GetMapping("/{id}/edit")
     public String displayEditCompanyForm(@PathVariable Long id, Model model,
                                          @RequestParam(value = "keyword", required = false) String keyword,
@@ -99,11 +96,14 @@ public class CompanyController {
         return EDIT_COMPANY_PAGE;
     }
 
-    @GetMapping("/{id}")
-    public String displayCompanyDetails(@PathVariable Long id, Model model) {
-        model.addAttribute("company", companyService.findCompanyById(id));
+    @PostMapping("/{id}/update")
+    public String updateCompany(@ModelAttribute("company") Company company,
+                                @PathVariable Long id,
+                                @RequestParam(value = "keyword", required = false) String keyword,
+                                @RequestParam(defaultValue = "1") int page) {
+        companyService.saveCompany(company);
 
-        return VIEW_COMPANY_PAGE;
+        return "redirect:" + COMPANIES_REDIRECT + "/page/" + page + "?keyword=" + (keyword == null ? "" : keyword);
     }
 
     @GetMapping("/{id}/delete")

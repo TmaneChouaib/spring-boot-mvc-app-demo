@@ -24,13 +24,8 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public void saveCompany(Company company) {
-        companyRepository.save(company);
-    }
-
-    @Override
-    public void deleteCompanyById(Long id) {
-        companyRepository.deleteById(id);
+    public Page<Company> findPaginatedCompaniesByName(String name, Pageable pageable) {
+        return companyRepository.findByNameContaining(name, pageable);
     }
 
     @Override
@@ -38,9 +33,15 @@ public class CompanyServiceImpl implements CompanyService {
         return companyRepository.findById(id).get();
     }
 
+
     @Override
-    public Page<Company> findPaginatedCompaniesByName(String name, Pageable pageable) {
-        return companyRepository.findByNameContaining(name, pageable);
+    public void saveCompany(Company company) {
+        companyRepository.save(company);
+    }
+
+    @Override
+    public void deleteCompanyById(Long id) {
+        companyRepository.deleteById(id);
     }
 
     @Override

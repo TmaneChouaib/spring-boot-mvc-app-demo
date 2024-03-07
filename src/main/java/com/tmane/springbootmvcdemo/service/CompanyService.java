@@ -11,13 +11,13 @@ import java.util.List;
 public interface CompanyService {
     Page<Company> findPaginatedCompanies(int pageNum, int pageSize);
 
-    void saveCompany(Company company);
-
-    void deleteCompanyById(Long id);
+    Page<Company> findPaginatedCompaniesByName(String name, Pageable pageable);
 
     Company findCompanyById(Long id);
 
-    Page<Company> findPaginatedCompaniesByName(String name, Pageable pageable);
+    void saveCompany(Company company);
+
+    void deleteCompanyById(Long id);
 
     Page<Company> findPaginatedCompaniesByCEO(String name, Pageable pageable);
 
