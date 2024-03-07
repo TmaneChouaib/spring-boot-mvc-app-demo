@@ -13,7 +13,7 @@
 <div layout:fragment="content">
     <div class="container mt-3">
         <div class="text-end">
-            <a class="btn bg-success bg-opacity-50 btn-outline-dark border-dark mb-2" th:href="@{/companies/new}">Add
+            <a class="btn btn-dark border-dark mb-2" th:href="@{/companies/new}">Add
                 new company</a>
         </div>
         <div class="card text-center">
@@ -26,7 +26,7 @@
                         <form th:action="@{/companies/page/1}" method="get">
                             <label class="form-label">Search :</label>
                             <input type="text" name="keyword" th:value="${keyword}"
-                                   placeholder="search by company name">
+                                   placeholder="Search by company name">
                             <button type="submit" class="btn btn-outline-dark border-dark mb-2"> 🔎</button>
                         </form>
                     </div>
@@ -38,24 +38,24 @@
                         <th></th>
                         <th>Name</th>
                         <th>CEO</th>
-                        <th>revenue</th>
+                        <th>Revenu</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody class="text-center">
                     <tr th:each="company:${companyList}">
                         <td class="border-dark border-end bg-light bg-gradient h5">
-                            <a class="btn btn-outline-dark border-dark"
+                            <a class="btn bg-dark bg-gradient bg-opacity-50 border-dark"
                                th:href="@{/companies/{id}(id=${company.id})}"> 👁️‍ ️</a>
                         </td>
                         <td class="border border-dark" th:text="${company.name}"></td>
                         <td class="border border-dark" th:text="${company.CEO}"></td>
                         <td class="border border-dark" th:text="${company.revenue}"></td>
                         <td class="bg-white border border-dark border-start">
-                            <a class="btn bg-info bg-gradient bg-opacity-50 btn-outline-dark border-dark ms-4"
+                            <a class="btn bg-info bg-gradient bg-opacity-75 btn-outline-dark border-dark ms-1 text-dark"
                                th:href="@{/companies/{id}/edit(id=${company.id},keyword=${keyword},page=${currentPage})}">
                                 Update</a>
-                            <a class="btn bg-danger bg-gradient bg-opacity-50 btn-outline-dark border-dark"
+                            <a class="btn bg-danger bg-gradient bg-opacity-50 btn-outline-dark border-dark text-dark"
                                th:href="@{/companies/{id}/delete(id=${company.id})}">
                                 Delete</a>
                         </td>

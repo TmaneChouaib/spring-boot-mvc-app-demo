@@ -25,7 +25,7 @@ public class Company {
     private String phoneNumber;
     private String email;
     private LocalDate foundationDate;
-    private Double revenue;
+    private Long revenue;
     private Integer numberOfEmployees;
     private String fiscalCode;
     @Enumerated(EnumType.STRING)

@@ -78,6 +78,9 @@ public class CompanyController {
 
     @PostMapping
     public String saveCompany(@ModelAttribute("company") Company company) {
+        if (company.getSector() == null || company.getSector().toString().isEmpty()) {
+            company.setSector(Sector.DFAULT_SECTOR);
+        }
         companyService.saveCompany(company);
 
         return "redirect:" + COMPANIES_REDIRECT + "/page/" + retrieveLastPageNumber();
