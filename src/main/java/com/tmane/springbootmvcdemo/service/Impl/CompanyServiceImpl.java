@@ -51,12 +51,12 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public List<Company> findCompaniesByCountry(String country) {
-        return companyRepository.findByCountry(country);
+        return companyRepository.findByCountryContaining(country);
     }
 
     @Override
     public List<Company> findCompaniesByCity(String city) {
-        return companyRepository.findByCity(city);
+        return companyRepository.findByCityContaining(city);
     }
 
     @Override

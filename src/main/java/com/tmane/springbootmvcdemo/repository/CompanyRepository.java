@@ -16,9 +16,9 @@ public interface CompanyRepository extends JpaRepository<Company, Long> {
 
     Page<Company> findByNameContaining(String name, Pageable pageable);
 
-    List<Company> findByCountry(String country);
+    List<Company> findByCountryContaining(String country);
 
-    List<Company> findByCity(String city);
+    List<Company> findByCityContaining(String city);
 
     List<Company> findByRevenueBetween(Double minRevenu, Double maxRevenu);
 
