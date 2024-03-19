@@ -9,9 +9,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.util.List;
-
 @Service
 @AllArgsConstructor
 public class CompanyServiceImpl implements CompanyService {
@@ -42,35 +39,5 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public void deleteCompanyById(Long id) {
         companyRepository.deleteById(id);
-    }
-
-    @Override
-    public Page<Company> findPaginatedCompaniesByCEO(String name, Pageable pageable) {
-        return companyRepository.findByCEOContaining(name, pageable);
-    }
-
-    @Override
-    public List<Company> findCompaniesByCountry(String country) {
-        return companyRepository.findByCountryContaining(country);
-    }
-
-    @Override
-    public List<Company> findCompaniesByCity(String city) {
-        return companyRepository.findByCityContaining(city);
-    }
-
-    @Override
-    public List<Company> findCompaniesByRevenueBetween(Double minRevenu, Double maxRevenu) {
-        return companyRepository.findByRevenueBetween(minRevenu, maxRevenu);
-    }
-
-    @Override
-    public List<Company> findCompaniesByNumberOfEmployeesBetween(Integer minEmployees, Integer maxEmployees) {
-        return companyRepository.findByNumberOfEmployeesBetween(minEmployees, maxEmployees);
-    }
-
-    @Override
-    public List<Company> findCompaniesByFoundationDateBetween(LocalDate startDate, LocalDate endDate) {
-        return companyRepository.findByFoundationDateBetween(startDate, endDate);
     }
 }

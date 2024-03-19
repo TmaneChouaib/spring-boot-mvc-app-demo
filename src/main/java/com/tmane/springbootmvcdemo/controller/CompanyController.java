@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@AllArgsConstructor
 @Controller
 @RequestMapping("/companies")
-@AllArgsConstructor
 public class CompanyController {
     private static final String COMPANIES_REDIRECT = "/companies";
     private static final String COMPANIES_PAGE = "/companies/companies";
