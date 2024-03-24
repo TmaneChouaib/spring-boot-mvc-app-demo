@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.tmane</groupId>
-    <artifactId>spring-Boot-MVC-App-demo</artifactId>
+    <artifactId>spring-boot-mvc-app-demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>spring-Boot-MVC-demo</name>
     <description>spring-Boot-MVC-demo</description>
