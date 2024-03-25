@@ -12,23 +12,21 @@
 <body>
 <div layout:fragment="content">
     <div class="container mt-3">
-        <div class="text-end">
-            <a class="btn btn-dark border-dark mb-2" th:href="@{/companies/new}">Add
-                new company</a>
-        </div>
         <div class="card text-center">
             <div class="card-body">
                 <div class="row">
                     <div class="col-8">
-
                     </div>
                     <div class="col-4">
-                        <form th:action="@{/companies/page/1}" method="get">
-                            <label class="form-label">Search :</label>
-                            <input type="text" name="keyword" th:value="${keyword}"
-                                   placeholder="Filter by companies name">
-                            <button type="submit" class="btn btn-outline-dark border-dark mb-2"> 🔎</button>
-                        </form>
+                        <div class="d-flex align-items-center">
+                            <form th:action="@{/companies/page/1}" method="get">
+                                <label class="form-label">Search :</label>
+                                <input type="text" name="keyword" th:value="${keyword}"
+                                       placeholder="Filter by companies name">
+                                <button type="submit" class="btn btn-outline-dark border-dark mb-2"> 🔎</button>
+                            </form>
+                            <a class="btn btn-white border-dark ms-2 mb-2" th:href="@{/companies/new}">➕</a>
+                        </div>
                     </div>
                 </div>
 
@@ -54,10 +52,10 @@
                         <td class="bg-white border border-dark border-start">
                             <a class="btn bg-info bg-gradient bg-opacity-75 btn-outline-dark border-dark ms-1 text-dark"
                                th:href="@{/companies/{id}/edit(id=${company.id},keyword=${keyword},page=${currentPage})}">
-                                Update</a>
+                                🖊️</a>
                             <a class="btn bg-danger bg-gradient bg-opacity-50 btn-outline-dark border-dark text-dark"
                                th:href="@{/companies/{id}/delete(id=${company.id})}">
-                                Delete</a>
+                                🗑️</a>
                         </td>
                     </tr>
                     </tbody>
