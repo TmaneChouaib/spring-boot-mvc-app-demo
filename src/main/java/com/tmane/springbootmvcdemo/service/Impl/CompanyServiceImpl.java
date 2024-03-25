@@ -1,6 +1,8 @@
 package com.tmane.springbootmvcdemo.service.Impl;
 
+import com.tmane.springbootmvcdemo.dto.CompanyDTO;
 import com.tmane.springbootmvcdemo.entity.Company;
+import com.tmane.springbootmvcdemo.mapper.CompanyMapper;
 import com.tmane.springbootmvcdemo.repository.CompanyRepository;
 import com.tmane.springbootmvcdemo.service.CompanyService;
 import lombok.AllArgsConstructor;
@@ -13,27 +15,36 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class CompanyServiceImpl implements CompanyService {
     private CompanyRepository companyRepository;
+    private CompanyMapper companyMapper;
 
     @Override
-    public Page<Company> findPaginatedCompanies(int pageNum, int pageSize) {
+    public Page<CompanyDTO> findPaginatedCompanies(int pageNum, int pageSize) {
         Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
-        return companyRepository.findAll(pageable);
+        Page<Company> page = companyRepository.findAll(pageable);
+        return page.map(companyMapper::mapToCompanyDTO);
     }
 
     @Override
-    public Page<Company> findPaginatedCompaniesByName(String name, Pageable pageable) {
-        return companyRepository.findByNameContaining(name, pageable);
+    public Page<CompanyDTO> findPaginatedCompaniesByName(String name, Pageable pageable) {
+
+        Page<Company> page = companyRepository.findByNameContaining(name, pageable);
+        return page.map(companyMapper::mapToCompanyDTO);
     }
 
     @Override
-    public Company findCompanyById(Long id) {
-        return companyRepository.findById(id).get();
+    public CompanyDTO findCompanyById(Long id) {
+
+        Company company = companyRepository.findById(id).get();
+        return companyMapper.mapToCompanyDTO(company);
     }
 
 
     @Override
-    public void saveCompany(Company company) {
+    public CompanyDTO saveCompany(CompanyDTO companyDTO) {
+        Company company = companyMapper.mapToCompany(companyDTO);
+
         companyRepository.save(company);
+        return companyMapper.mapToCompanyDTO(company);
     }
 
     @Override

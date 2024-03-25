@@ -1,5 +1,6 @@
 package com.tmane.springbootmvcdemo.controller;
 
+import com.tmane.springbootmvcdemo.dto.CompanyDTO;
 import com.tmane.springbootmvcdemo.entity.Company;
 import com.tmane.springbootmvcdemo.enums.Sector;
 import com.tmane.springbootmvcdemo.service.CompanyService;
@@ -26,7 +27,7 @@ public class CompanyController {
 
 
     public int retrieveLastPageNumber() {
-        Page<Company> page = companyService.findPaginatedCompanies(1, PAGE_SIZE);
+        Page<CompanyDTO> page = companyService.findPaginatedCompanies(1, PAGE_SIZE);
 
         return page.getTotalPages();
     }
@@ -42,7 +43,7 @@ public class CompanyController {
                                             @PathVariable(value = "pageNum") int pageNum,
                                             @RequestParam(name = "keyword", required = false) String keyword) {
 
-        Page<Company> page;
+        Page<CompanyDTO> page;
 
         if (keyword != null && !keyword.trim().isEmpty() && !"null".equalsIgnoreCase(keyword)) {
             page = companyService.findPaginatedCompaniesByName((keyword), PageRequest.of(pageNum - 1, PAGE_SIZE));
@@ -50,7 +51,7 @@ public class CompanyController {
             page = companyService.findPaginatedCompanies(pageNum, PAGE_SIZE);
         }
 
-        List<Company> companyList = page.getContent();
+        List<CompanyDTO> companyList = page.getContent();
 
         model.addAttribute("currentPage", pageNum);
         model.addAttribute("totalPages", page.getTotalPages());
@@ -77,11 +78,11 @@ public class CompanyController {
     }
 
     @PostMapping
-    public String saveCompany(@ModelAttribute("company") Company company) {
-        if (company.getSector() == null || company.getSector().toString().isEmpty()) {
-            company.setSector(Sector.DFAULT_SECTOR);
+    public String saveCompany(@ModelAttribute("company") CompanyDTO companyDTO) {
+        if (companyDTO.getSector() == null || companyDTO.getSector().toString().isEmpty()) {
+            companyDTO.setSector(Sector.DFAULT_SECTOR);
         }
-        companyService.saveCompany(company);
+        companyService.saveCompany(companyDTO);
 
         return "redirect:" + COMPANIES_REDIRECT + "/page/" + retrieveLastPageNumber();
     }
@@ -90,8 +91,8 @@ public class CompanyController {
     public String displayEditCompanyForm(@PathVariable Long id, Model model,
                                          @RequestParam(value = "keyword", required = false) String keyword,
                                          @RequestParam(value = "page", defaultValue = "1") int page) {
-        Company company = companyService.findCompanyById(id);
-        model.addAttribute("company", company);
+        CompanyDTO companyDTO = companyService.findCompanyById(id);
+        model.addAttribute("company", companyDTO);
         model.addAttribute("sectors", Sector.values());
         model.addAttribute("page", page);
         model.addAttribute(("keyword"), keyword);
@@ -100,11 +101,11 @@ public class CompanyController {
     }
 
     @PostMapping("/{id}/update")
-    public String updateCompany(@ModelAttribute("company") Company company,
+    public String updateCompany(@ModelAttribute("company") CompanyDTO companyDTO,
                                 @PathVariable Long id,
                                 @RequestParam(value = "keyword", required = false) String keyword,
                                 @RequestParam(defaultValue = "1") int page) {
-        companyService.saveCompany(company);
+        companyService.saveCompany(companyDTO);
 
         return "redirect:" + COMPANIES_REDIRECT + "/page/" + page + "?keyword=" + (keyword == null ? "" : keyword);
     }

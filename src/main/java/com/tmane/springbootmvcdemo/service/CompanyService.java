@@ -1,18 +1,18 @@
 package com.tmane.springbootmvcdemo.service;
 
-import com.tmane.springbootmvcdemo.entity.Company;
+import com.tmane.springbootmvcdemo.dto.CompanyDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 
 public interface CompanyService {
-    Page<Company> findPaginatedCompanies(int pageNum, int pageSize);
+    Page<CompanyDTO> findPaginatedCompanies(int pageNum, int pageSize);
 
-    Page<Company> findPaginatedCompaniesByName(String name, Pageable pageable);
+    Page<CompanyDTO> findPaginatedCompaniesByName(String name, Pageable pageable);
 
-    Company findCompanyById(Long id);
+    CompanyDTO findCompanyById(Long id);
 
-    void saveCompany(Company company);
+    CompanyDTO saveCompany(CompanyDTO companyDTO);
 
     void deleteCompanyById(Long id);
 }

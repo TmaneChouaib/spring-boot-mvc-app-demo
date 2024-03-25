@@ -2,18 +2,15 @@ package com.tmane.springbootmvcdemo.mapper;
 
 import com.tmane.springbootmvcdemo.dto.CompanyDTO;
 import com.tmane.springbootmvcdemo.entity.Company;
-import com.tmane.springbootmvcdemo.enums.Sector;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
-
 @Component
-public class CompanyMapper {
+public class    CompanyMapper {
     public CompanyDTO mapToCompanyDTO(Company company) {
         CompanyDTO companyDTO=new CompanyDTO();
-        companyDTO.setId(companyDTO.getId());
+
+        companyDTO.setId(company.getId());
         companyDTO.setName(company.getName());
         companyDTO.setAddress(company.getAddress());
         companyDTO.setCountry(company.getCountry());
