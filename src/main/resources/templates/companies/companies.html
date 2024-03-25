@@ -16,6 +16,11 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-8">
+                        <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <button type="button" class="btn-close float-end" data-bs-dismiss="alert"
+                                    aria-label="close"></button>
+                            <p th:utext="${error}" class="d-inline-block mb-0"></p>
+                        </div>
                     </div>
                     <div class="col-4">
                         <div class="d-flex align-items-center">
