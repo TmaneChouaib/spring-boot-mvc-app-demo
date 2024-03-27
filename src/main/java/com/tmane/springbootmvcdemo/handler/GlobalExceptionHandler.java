@@ -19,11 +19,11 @@ public class GlobalExceptionHandler {
         redirectAttributes.addFlashAttribute("error", e.getMessage());
         return "redirect:/companies";
     }
-    @ExceptionHandler(Exception.class)
+/*    @ExceptionHandler(Exception.class)
     public String handleGeneralException(Exception e, RedirectAttributes redirectAttributes) {
         e.printStackTrace();
         String errorMsg = messageSource.getMessage("general.error", null, Locale.getDefault()) + ":" + e.getMessage();
         redirectAttributes.addFlashAttribute("error", errorMsg);
         return "redirect:/companies";
-    }
+    }*/
 }
