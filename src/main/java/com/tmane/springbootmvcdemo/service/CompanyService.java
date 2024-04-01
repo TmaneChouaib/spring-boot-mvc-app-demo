@@ -13,7 +13,7 @@ public interface CompanyService {
 
     CompanyDTO findCompanyById(Long id) throws CompanyNoSuchElementException;
 
-    CompanyDTO saveCompany(CompanyDTO companyDTO);
+    void saveCompany(CompanyDTO companyDTO);
 
     void deleteCompanyById(Long id);
 }

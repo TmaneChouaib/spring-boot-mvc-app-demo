@@ -49,11 +49,11 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public CompanyDTO saveCompany(CompanyDTO companyDTO) {
+    public void saveCompany(CompanyDTO companyDTO) {
         Company company = companyMapper.mapToCompany(companyDTO);
 
         companyRepository.save(company);
-        return companyMapper.mapToCompanyDTO(company);
+        companyMapper.mapToCompanyDTO(company);
     }
 
     @Override
