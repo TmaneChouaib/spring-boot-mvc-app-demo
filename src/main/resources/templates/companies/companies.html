@@ -29,16 +29,18 @@
                                 <label class="form-label">Search :</label>
                                 <input type="text" name="keyword" th:value="${keyword}"
                                        placeholder="Search by companies name">
-                                <button type="submit" class="btn btn-outline-dark border-dark mb-2"> <i class="bi bi-search"></i> </button>
+                                <button type="submit" class="btn btn-outline-dark border-dark mb-2"><i
+                                        class="bi bi-search"></i></button>
                             </form>
-                            <a class="btn btn-white border-dark ms-2 mb-2" th:href="@{/companies/new}"><i class="bi bi-plus-circle-fill"></i></a>
+                            <a class="btn btn-white border-dark ms-2 mb-2" th:href="@{/companies/new}"><i
+                                    class="bi bi-plus-circle-fill"></i></a>
                         </div>
                     </div>
                 </div>
 
-                <table class="table table-white table-striped border border-dark">
+                <table class="table table-striped border border-dark">
                     <thead>
-                    <tr class="table table-dark text-white h5">
+                    <tr class="table table-success text-white h5">
                         <th></th>
                         <th>Company</th>
                         <th>CEO</th>
@@ -48,18 +50,19 @@
                     </thead>
                     <tbody class="text-center">
                     <tr th:each="company:${companyList}">
-                        <td class="border-dark border-end bg-dark bg-gradient h5">
-                            <a class="btn border-dark bg-white"
-                               th:href="@{/companies/{id}(id=${company.id})}"> <i class="bi bi-file-earmark-arrow-up"></i>  ️</a>
+                        <td class="border-dark border-end color-nyanza bg-gradient h5">
+                            <a class="btn border-dark color-jungle-green"
+                               th:href="@{/companies/{id}(id=${company.id})}"> <i
+                                    class="bi bi-file-earmark-arrow-up"></i> ️</a>
                         </td>
                         <td class="border border-dark" th:text="${company.name}"></td>
                         <td class="border border-dark" th:text="${company.CEO}"></td>
                         <td class="border border-dark" th:text="${company.revenue}"></td>
                         <td class="bg-white border border-dark border-start">
-                            <a class="btn bg-info bg-gradient bg-opacity-75 btn-outline-dark border-dark ms-1 text-dark"
+                            <a class="btn color-jungle-green bg-gradient bg-opacity-75 btn-outline-dark border-dark ms-1 text-dark"
                                th:href="@{/companies/{id}/edit(id=${company.id},keyword=${keyword},page=${currentPage})}">
                                 <i class="bi bi-vector-pen"></i></a>
-                            <a class="btn bg-danger bg-gradient bg-opacity-50 btn-outline-dark border-dark text-dark"
+                            <a class="btn color-jungle-green bg-gradient bg-opacity-50 btn-outline-dark border-dark text-dark"
                                th:href="@{/companies/{id}/delete(id=${company.id})}">
                                 <i class="bi bi-trash-fill"></i></a>
                         </td>

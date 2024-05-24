@@ -1,18 +1,51 @@
 .page-link {
-    background-color: #000000;
+    background-color: #2C7865;
     color: white;
 }
 
 .page-link:hover {
     background-color: #f5eef8;
-    color: #000000;
+    color: #2C7865;
     transform: scale(1.2);
     transition: transform 0.3s ease;
 }
 
 .page-link.active {
     background-color: #f5eef8;
-    color: #000000;
-    border-color: #000000;
+    color: #2C7865;
+    border-color: #2C7865;
     transform: scale(1.2);
+}
+
+.color-nyanza {
+    background-color: #ECFFDC !important;
+}
+
+.color-pastel-green {
+    background-color: #C1E1C1 !important;
+}
+
+.color-light-mint {
+    background-color: #8AE1A6 !important;
+}
+
+.color-emerald-green {
+    background-color: #50C878 !important;
+}
+
+.color-jungle-green {
+    background-color: #2AAA8A !important;
+}
+
+.color-deep-sea-green {
+    background-color: #2C7865 !important;
+}
+
+.color-dark-green {
+    background-color: #023020 !important;
+}
+
+.table-success th {
+    background-color: #2AAA8A !important;
+    color: white !important;
 }
