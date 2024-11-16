@@ -23,7 +23,7 @@ public class CompanyController {
 
 
     public int retrieveLastPageNumber() {
-        Page<CompanyDTO> page = companyService.findPaginatedCompanies(1, PAGE_SIZE);
+        Page<CompanyDTO> page = companyService.findPaginatedCompanies(PAGE_NUMBER, PAGE_SIZE);
 
         return page.getTotalPages();
     }
@@ -31,7 +31,7 @@ public class CompanyController {
     @GetMapping
     public String displayHomePage(Model model,
                                   @RequestParam(value = "keyword", required = false) String keyword) {
-        return displayPaginatedCompanies(model, 1, keyword);
+        return displayPaginatedCompanies(model, PAGE_NUMBER, keyword);
     }
 
     @GetMapping("/page/{pageNum}")
