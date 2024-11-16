@@ -30,17 +30,10 @@
             </div>
             <div class="card-body">
                 <p><strong> name : </strong><span th:text="${company.name}"></span></p>
-                <p><strong> address : </strong><span th:text="${company.address}"></span></p>
                 <p><strong> country : </strong><span th:text="${company.country}"></span></p>
-                <p><strong> city : </strong><span th:text="${company.city}"></span></p>
-                <p><strong> postal Code : </strong><span th:text="${company.postalCode}"></span></p>
                 <p><strong> CEO : </strong><span th:text="${company.CEO}"></span></p>
-                <p><strong> phone Number : </strong><span th:text="${company.phoneNumber}"></span></p>
-                <p><strong> email : </strong><span th:text="${company.email}"></span></p>
                 <p><strong> foundation Date : </strong><span th:text="${company.foundationDate}"></span></p>
                 <p><strong> revenue : </strong><span th:text="${company.revenue}"></span></p>
-                <p><strong> number Of Employees : </strong><span th:text="${company.numberOfEmployees}"></span></p>
-                <p><strong> fiscal Code : </strong><span th:text="${company.fiscalCode}"></span></p>
                 <p><strong> Sector : </strong>
                     <span th:if="${company.sector != null}" th:text="${#strings.capitalize(company.sector.toString().replace('_',' '))}"></span></p>
             </div>

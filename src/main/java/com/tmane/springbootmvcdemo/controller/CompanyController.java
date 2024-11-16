@@ -13,16 +13,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.tmane.springbootmvcdemo.util.Constants.*;
+
 @AllArgsConstructor
 @Controller
 @RequestMapping("/companies")
 public class CompanyController {
-    private static final String COMPANIES_REDIRECT = "/companies";
-    private static final String COMPANIES_PAGE = "/companies/companies";
-    private static final String ADD_COMPANY_PAGE = "/companies/AddCompany";
-    private static final String EDIT_COMPANY_PAGE = "/companies/EditCompany";
-    private static final String VIEW_COMPANY_PAGE = "/companies/company";
-    private static final int PAGE_SIZE = 10;
     private final CompanyService companyService;
 
 

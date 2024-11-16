@@ -18,7 +18,8 @@
                 <div class="row">
                     <div class="form-group col-md-6 mb-4 mt-4">
                         <label for="name">name :</label>
-                        <input type="text" th:field="*{name}" placeholder="company name" id="name" name="name" class="form-control">
+                        <input type="text" th:field="*{name}" placeholder="company name" id="name" name="name"
+                               class="form-control">
                     </div>
                     <div class="form-group col-md-6 mb-4 mt-4">
                         <label for="name">country :</label>
@@ -26,36 +27,13 @@
                                class="form-control">
                     </div>
                     <div class="form-group col-md-6 mb-4">
-                        <label for="name">address :</label>
-                        <input type="text" th:field="*{address}" placeholder="address" id="address" name="address"
-                               class="form-control">
-                    </div>
-                    <div class="form-group col-md-6 mb-4">
-                        <label for="name">city :</label>
-                        <input type="text" th:field="*{city}" placeholder="city" id="city" name="city" class="form-control">
-                    </div>
-                    <div class="form-group col-md-6 mb-4">
-                        <label for="name">postalCode :</label>
-                        <input type="text" th:field="*{postalCode}" placeholder="postal code" id="postalCode" name="postalCode"
-                               class="form-control">
-                    </div>
-                    <div class="form-group col-md-6 mb-4">
                         <label for="name">CEO :</label>
                         <input type="text" th:field="*{CEO}" placeholder="CEO" id="CEO" name="CEO" class="form-control">
                     </div>
                     <div class="form-group col-md-6 mb-4">
-                        <label for="name">phoneNumber :</label>
-                        <input type="text" th:field="*{phoneNumber}" placeholder="phone number" id="phoneNumber" name="phoneNumber"
-                               class="form-control">
-                    </div>
-                    <div class="form-group col-md-6 mb-4">
-                        <label for="name">email :</label>
-                        <input type="email" th:field="*{email}" placeholder="email" id="email" name="email"
-                               class="form-control">
-                    </div>
-                    <div class="form-group col-md-6 mb-4">
                         <label for="name">foundationDate :</label>
-                        <input type="date" th:field="*{foundationDate}" placeholder="foundation date" id="foundationDate"
+                        <input type="date" th:field="*{foundationDate}" placeholder="foundation date"
+                               id="foundationDate"
                                name="foundationDate" class="form-control">
                     </div>
                     <div class="form-group col-md-6 mb-4">
@@ -63,27 +41,14 @@
                         <input type="number" th:field="*{revenue}" placeholder="revenue" id="revenue" name="revenue"
                                class="form-control">
                     </div>
-                    <div class="form-group col-md-6 mb-4">
-                        <label for="name">numberOfEmployees :</label>
-                        <input type="number" th:field="*{numberOfEmployees}" placeholder="number of employees" id="numberOfEmployees"
-                               name="numberOfEmployees" class="form-control">
-                    </div>
-                    <div class="form-group col-md-6 mb-4">
-                        <label for="name">fiscalCode :</label>
-                        <input type="text" th:field="*{fiscalCode}" placeholder="fiscal code" id="fiscalCode"
-                               name="fiscalCode" class="form-control">
-                    </div>
                 </div>
-                <div class="row">
-                    <div class="form-group col-md-12 mb-4">
-                        <label for="sector">Sector: </label>
-                        <select th:field="*{sector}" id="sector" class="form-select">
-                            <option th:each="sector:${sectors}" th:value="${sector}"
-                            th:text="${#strings.capitalize(sector.toString().replace('_',' '))}"></option>
-                        </select>
-                    </div>
+                <div class="form-group col-md-6 mb-4">
+                    <label for="sector">Sector: </label>
+                    <select th:field="*{sector}" id="sector" class="form-select">
+                        <option th:each="sector:${sectors}" th:value="${sector}"
+                                th:text="${#strings.capitalize(sector.toString().replace('_',' '))}"></option>
+                    </select>
                 </div>
-
                 <div class="row justify-content-end me-2">
                     <button type="submit" class="btn btn-dark col-md-2">
                         Add
