@@ -4,10 +4,6 @@
       layout:decorate="template">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css">
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
-
 </head>
 <body>
 <div layout:fragment="content">
@@ -16,15 +12,16 @@
             <div class="row">
                 <div class="col-md-8 card-header">Détails :</div>
                 <div class="col-md-4 card-header justify-content-end">
-                    <td class="border-dark border-end h5">
-                        <a class="btn btn-outline-dark border-dark"
-                           th:href="@{/companies}"> 🔙 ️</a>
-                        <a class="btn btn-outline-dark border-dark "
+                    <td class="border-dark border-end">
+                        <a class="btn color-deep-sea-green text-white panel-btn border"
+                           th:href="@{/companies}">
+                            <i class="bi bi-arrow-left-circle"></i>️</a>
+                        <a class="btn color-deep-sea-green text-white panel-btn border"
                            th:href="@{/companies/{id}/edit(id=${company.id})}">
-                            📝</a>
-                        <a class="btn btn-outline-dark border-dark"
+                            <i class="bi bi-pencil-fill"></i></a>
+                        <a class="btn color-deep-sea-green text-white panel-btn border"
                            th:href="@{/companies/{id}/delete(id=${company.id})}">
-                            🗑️</a>
+                            <i class="bi bi-trash-fill"></i></a>
                     </td>
                 </div>
             </div>
@@ -35,7 +32,8 @@
                 <p><strong> foundation Date : </strong><span th:text="${company.foundationDate}"></span></p>
                 <p><strong> revenue : </strong><span th:text="${company.revenue}"></span></p>
                 <p><strong> Sector : </strong>
-                    <span th:if="${company.sector != null}" th:text="${#strings.capitalize(company.sector.toString().replace('_',' '))}"></span></p>
+                    <span th:if="${company.sector != null}"
+                          th:text="${#strings.capitalize(company.sector.toString().replace('_',' '))}"></span></p>
             </div>
         </div>
     </div>

@@ -1,13 +1,17 @@
 .page-link {
     background-color: #2C7865;
     color: white;
+    position: relative;
+    z-index: 1;
 }
 
 .page-link:hover {
     background-color: #f5eef8;
     color: #2C7865;
+    border-color: #2C7865;
     transform: scale(1.2);
     transition: transform 0.3s ease;
+    z-index: 2;
 }
 
 .page-link.active {
@@ -15,6 +19,7 @@
     color: #2C7865;
     border-color: #2C7865;
     transform: scale(1.2);
+    z-index: 1;
 }
 
 .color-nyanza {
@@ -41,11 +46,17 @@
     background-color: #2C7865 !important;
 }
 
-.color-dark-green {
-    background-color: #023020 !important;
+.panel-btn {
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.panel-btn:hover {
+    transform: scale(1.1);
+    background-color: #000 !important;
 }
 
 .table-success th {
     background-color: #2AAA8A !important;
     color: white !important;
 }
+

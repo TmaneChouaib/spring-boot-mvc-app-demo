@@ -4,65 +4,69 @@
       layout:decorate="template">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css">
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
-
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="container">
-        <form th:action="@{/companies/{id}/update(id=${company.id},page=${page})}"
-              th:object="${company}" method="post">
+    <div class="container d-flex justify-content-center align-items-center">
+        <div class="col-6">
+            <form th:action="@{/companies/{id}/update(id=${company.id},page=${page})}"
+                  th:object="${company}" method="post">
 
-            <input type="hidden" th:name="id" th:value="${company.id}">
-            <input type="hidden" th:name="pageNum" th:value="${page}">
-            <input type="hidden" th:name="keyword" th:value="${keyword}">
+                <input type="hidden" th:name="id" th:value="${company.id}">
+                <input type="hidden" th:name="pageNum" th:value="${page}">
+                <input type="hidden" th:name="keyword" th:value="${keyword}">
 
-            <div class="border mt-4 ps-2 pe-2 pb-2">
-                <h2 class="border bg-dark bg-gradient text-center text-white h2">Update</h2>
-                <div class="row">
-                    <input type="hidden" th:field="*{id}"/>
-                    <div class="form-group col-md-6 mb-4 mt-4">
-                        <label for="name">name :</label>
-                        <input type="text" th:field="*{name}" placeholder="company name" id="name" name="name"
-                               class="form-control">
+                <div class="card mt-4">
+                    <p class="card-header">EDIT Company</p>
+                    <div class="card-body p-2">
+                        <div class="row">
+                            <div class="form-group col-md-6 mb-4 mt-4">
+                                <label for="name">name :</label>
+                                <input type="text" th:field="*{name}" placeholder="company name" id="name" name="name"
+                                       class="form-control">
+                            </div>
+                            <div class="form-group col-md-6 mb-4 mt-4">
+                                <label for="name">country :</label>
+                                <input type="text" th:field="*{country}" placeholder="country" id="country"
+                                       name="country"
+                                       class="form-control">
+                            </div>
+                            <div class="form-group col-md-6 mb-4">
+                                <label for="name">CEO :</label>
+                                <input type="text" th:field="*{CEO}" placeholder="CEO" id="CEO" name="CEO"
+                                       class="form-control">
+                            </div>
+                            <div class="form-group col-md-6 mb-4">
+                                <label for="name">foundationDate :</label>
+                                <input type="date" th:field="*{foundationDate}" placeholder="foundation date"
+                                       id="foundationDate"
+                                       name="foundationDate" class="form-control">
+                            </div>
+                            <div class="form-group col-md-6 mb-4">
+                                <label for="name">revenue :</label>
+                                <input type="number" th:field="*{revenue}" placeholder="revenue" id="revenue"
+                                       name="revenue"
+                                       class="form-control">
+                            </div>
+                            <div class="form-group col-md-6 mb-4">
+                                <label for="sector">Sector: </label>
+                                <select th:field="*{sector}" id="sector" class="form-select">
+                                    <option th:each="sector:${sectors}" th:value="${sector}"
+                                            th:text="${#strings.capitalize(sector.toString().replace('_',' '))}"></option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group col-md-6 mb-4 mt-4">
-                        <label for="name">country :</label>
-                        <input type="text" th:field="*{country}" placeholder="country" id="country" name="country"
-                               class="form-control">
-                    </div>
-                    <div class="form-group col-md-6 mb-4">
-                        <label for="name">CEO :</label>
-                        <input type="text" th:field="*{CEO}" placeholder="CEO" id="CEO" name="CEO" class="form-control">
-                    </div>
-                    <div class="form-group col-md-6 mb-4">
-                        <label for="name">foundationDate :</label>
-                        <input type="date" th:field="*{foundationDate}" placeholder="foundation date"
-                               id="foundationDate"
-                               name="foundationDate" class="form-control">
-                    </div>
-                    <div class="form-group col-md-6 mb-4">
-                        <label for="name">revenue :</label>
-                        <input type="number" th:field="*{revenue}" placeholder="revenue" id="revenue" name="revenue"
-                               class="form-control">
+                    <div class="card-footer">
+                        <div class="col d-flex justify-content-end mb-1 me-2">
+                            <button class="btn btn-lg color-deep-sea-green panel-btn text-white btn-outline-dark"
+                                    type="submit"><i class="bi bi-pencil-fill"></i>>
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group col-md-6 mb-4">
-                    <label for="sector">Sector: </label>
-                    <select th:field="*{sector}" id="sector" class="form-select">
-                        <option th:each="sector:${sectors}" th:value="${sector}"
-                                th:text="${#strings.capitalize(sector.toString().replace('_',' '))}"></option>
-                    </select>
-                </div>
-                <div class="row justify-content-end me-2">
-                    <button type="submit" class="btn btn-dark col-md-2">
-                        Update
-                    </button>
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>
 </body>
